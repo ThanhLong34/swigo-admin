@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --open",
+    "start": "ng serve",
     "build": "ng build --configuration production --base-href /angular/free/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -26,6 +26,8 @@
     "apexcharts": "^3.49.0",
     "ng-apexcharts": "^1.10.0",
     "ngx-scrollbar": "^13.0.3",
+    "primeicons": "^7.0.0",
+    "primeng": "^17.18.9",
     "rxjs": "~7.8.1",
     "tslib": "^2.6.2",
     "zone.js": "~0.14.4"
