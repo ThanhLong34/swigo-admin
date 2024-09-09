@@ -26,6 +26,9 @@ import {
   ApexResponsive
 } from 'ng-apexcharts';
 
+// PrimeNG
+import { ButtonModule } from 'primeng/button';
+
 export type ChartOptions = {
   series: ApexAxisChartSeries | ApexNonAxisChartSeries;
   chart: ApexChart | undefined;
@@ -47,7 +50,7 @@ export type ChartOptions = {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, SharedModule, NgApexchartsModule],
+  imports: [CommonModule, SharedModule, NgApexchartsModule, ButtonModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
