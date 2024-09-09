@@ -10,7 +10,7 @@
 // theme setup
 @import './app/@theme/styles/theme-palette-colors.scss';
 @import './app/@theme/styles/theme.scss';
-@include mat.all-component-typographies(theme-typography("'Inter var', sans-serif")); // theme typography
+@include mat.all-component-typographies(theme-typography("'Poppins', sans-serif")); // theme typography
 
 // default theme
 @include mat.all-component-themes(get-light-theme($blue-theme));
