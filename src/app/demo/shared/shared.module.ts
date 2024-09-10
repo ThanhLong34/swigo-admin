@@ -21,6 +21,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+// primeNG import
+import { ButtonModule } from 'primeng/button';
+
 // project
 import { CardComponent } from 'src/app/@theme/components/card/card.component';
 
@@ -46,8 +49,10 @@ const MaterialModules = [
   MatTooltipModule
 ];
 
+const PrimeNGModules = [ButtonModule];
+
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgScrollbarModule, CardComponent, MaterialModules],
-  exports: [FormsModule, ReactiveFormsModule, NgScrollbarModule, CardComponent, MaterialModules]
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgScrollbarModule, CardComponent, MaterialModules, PrimeNGModules],
+  exports: [FormsModule, ReactiveFormsModule, NgScrollbarModule, CardComponent, MaterialModules, PrimeNGModules]
 })
 export class SharedModule {}

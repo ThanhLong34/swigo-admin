@@ -2,8 +2,8 @@ import { Navigation } from 'src/app/@theme/types/navigation';
 
 export const menus: Navigation[] = [
   {
-    id: 'navigation',
-    title: 'Navigation',
+    id: 'overview',
+    title: 'Overview',
     type: 'group',
     icon: 'icon-navigation',
     children: [
@@ -18,8 +18,104 @@ export const menus: Navigation[] = [
     ]
   },
   {
-    id: 'auth',
-    title: 'Authentication',
+    id: 'system',
+    title: 'System',
+    type: 'group',
+    icon: 'icon-navigation',
+    children: [
+      {
+        id: 'Dashboard',
+        title: 'Dashboard',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/dashboard',
+        icon: '#custom-status-up'
+      }
+    ]
+  },
+  {
+    id: 'customer',
+    title: 'Customer',
+    type: 'group',
+    icon: 'icon-navigation',
+    children: [
+      {
+        id: 'Dashboard',
+        title: 'Dashboard',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/dashboard',
+        icon: '#custom-status-up'
+      }
+    ]
+  },
+  {
+    id: 'order',
+    title: 'Order',
+    type: 'group',
+    icon: 'icon-navigation',
+    children: [
+      {
+        id: 'Dashboard',
+        title: 'Dashboard',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/dashboard',
+        icon: '#custom-status-up'
+      }
+    ]
+  },
+  {
+    id: 'production',
+    title: 'Production',
+    type: 'group',
+    icon: 'icon-navigation',
+    children: [
+      {
+        id: 'Dashboard',
+        title: 'Dashboard',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/dashboard',
+        icon: '#custom-status-up'
+      }
+    ]
+  },
+  {
+    id: 'news',
+    title: 'News',
+    type: 'group',
+    icon: 'icon-navigation',
+    children: [
+      {
+        id: 'Dashboard',
+        title: 'Dashboard',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/dashboard',
+        icon: '#custom-status-up'
+      }
+    ]
+  },
+  {
+    id: 'hr',
+    title: 'Human Resource',
+    type: 'group',
+    icon: 'icon-navigation',
+    children: [
+      {
+        id: 'Dashboard',
+        title: 'Dashboard',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/dashboard',
+        icon: '#custom-status-up'
+      }
+    ]
+  },
+  {
+    id: 'ui-example',
+    title: 'UI Example',
     type: 'group',
     icon: 'icon-navigation',
     children: [
@@ -42,15 +138,7 @@ export const menus: Navigation[] = [
         icon: '#custom-password-check',
         target: true,
         breadcrumbs: false
-      }
-    ]
-  },
-  {
-    id: 'ui-component',
-    title: 'Ui Component',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
+      },
       {
         id: 'typography',
         title: 'Typography',
@@ -76,15 +164,7 @@ export const menus: Navigation[] = [
         icon: '#custom-mouse-circle',
         target: true,
         external: true
-      }
-    ]
-  },
-  {
-    id: 'other',
-    title: 'Other',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
+      },
       {
         id: 'menu-levels',
         title: 'Menu levels',
@@ -188,5 +268,5 @@ export const menus: Navigation[] = [
         icon: '#custom-notification-status'
       }
     ]
-  }
+  },
 ];
