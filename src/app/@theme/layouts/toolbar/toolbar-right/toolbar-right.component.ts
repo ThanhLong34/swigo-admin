@@ -1,5 +1,6 @@
 // angular import
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-right',
@@ -72,4 +73,12 @@ export class NavRightComponent {
       img: 'assets/images/layout/img-announcement-4.png'
     }
   ];
+
+  constructor(private router: Router) {}
+
+  handleSignOut() {
+    this.router.navigate(['/auth/login'], {
+      replaceUrl: true
+    });
+  }
 }

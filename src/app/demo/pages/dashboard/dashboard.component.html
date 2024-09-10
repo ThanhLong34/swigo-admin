@@ -32,7 +32,6 @@
         </div>
         <div class="flex-grow-1 card-head">
           <h5 class="m-b-0 f-w-600">All Earnings</h5>
-          <p-button label="Check" icon="pi pi-check"></p-button>
         </div>
       </div>
       <div class="chart-body">
@@ -327,7 +326,7 @@
           </a>
         }
         <div class="grid m-t-15">
-          <button mat-flat-button color="primary" class="b-rad-20"><i class="ti ti-plus f-18"></i>Add Task</button>
+          <p-button label="Add task" icon="pi pi-plus" size="small" class="w-full" />
         </div>
       </div>
     </app-card>
@@ -382,7 +381,7 @@
         </div>
         <div class="col-md-6 col-xl-4">
           <div class="m-t-15 grid">
-            <button mat-flat-button class="b-rad-20" color="primary"><i class="ti ti-plus"></i> Add project</button>
+            <p-button label="Add project" icon="pi pi-plus" class="w-full" size="small" />
           </div>
         </div>
       </div>
@@ -397,8 +396,8 @@
           </div>
         </div>
         <div class="flex-grow-1 m-l-15">
-          <h6 class="m-b-0">Able pro</h6>
-          <small class="text-muted">&#64;ableprodevelop</small>
+          <h6 class="m-b-0">Swigo</h6>
+          <small class="text-muted">&#64;ecommerce</small>
         </div>
         <a [matMenuTriggerFor]="menu" class="avatar avatar-s"><i class="ti ti-dots-vertical f-18"></i></a>
       </div>
@@ -437,16 +436,19 @@
         <div class="row g-2">
           <div class="col-lg-6 m-t-10">
             <div class="grid">
-              <button class="grid b-rad-20" mat-stroked-button
-                ><span class="text-truncate w-100">View all Transaction History</span></button
-              >
+              <p-button
+                label="View all Transaction History"
+                icon="pi pi-history"
+                size="small"
+                severity="secondary"
+                [outlined]="true"
+                class="w-full"
+              />
             </div>
           </div>
           <div class="col-lg-6 m-t-10">
             <div class="grid">
-              <button class="grid b-rad-20" mat-flat-button color="primary"
-                ><span class="text-truncate w-100">Create new Transaction</span></button
-              >
+              <p-button label="Create new Transaction" icon="pi pi-plus" size="small" class="w-full" />
             </div>
           </div>
         </div>

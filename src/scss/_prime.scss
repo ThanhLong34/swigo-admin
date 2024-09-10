@@ -1,0 +1,17 @@
+// Override primeNG styles
+@layer primeng {
+  p-button {
+    &.w-full {
+      width: 100%;
+      .p-button {
+        width: 100%;
+      }
+    }
+  }
+
+  .p-button {
+    .p-button-icon.p-button-icon-left {
+      margin-right: 0.5rem !important;
+    }
+  }
+}

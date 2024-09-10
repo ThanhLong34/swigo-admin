@@ -1,7 +1,7 @@
 {
-  "name": "able-pro-angular-free",
-  "version": "2.1.0",
-  "author": "PhoenixCoded",
+  "name": "swigo-admin",
+  "version": "1.0.0",
+  "author": "ThanhLong0304",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -26,6 +26,7 @@
     "apexcharts": "^3.49.0",
     "ng-apexcharts": "^1.10.0",
     "ngx-scrollbar": "^13.0.3",
+    "primeflex": "^3.3.1",
     "primeicons": "^7.0.0",
     "primeng": "^17.18.9",
     "rxjs": "~7.8.1",
