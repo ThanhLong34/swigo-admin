@@ -1,0 +1,8 @@
+// Override primeNG styles
+@layer primeng {
+  .p-button {
+    .p-button-icon.p-button-icon-left {
+      margin-right: 0.5rem !important;
+    }
+  }
+}
