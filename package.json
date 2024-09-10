@@ -1,7 +1,7 @@
 {
-  "name": "able-pro-angular-free",
-  "version": "2.1.0",
-  "author": "PhoenixCoded",
+  "name": "swigo-admin",
+  "version": "1.0.0",
+  "author": "ThanhLong0304",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
