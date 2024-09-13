@@ -6,53 +6,54 @@
         <div class="red-circle"></div>
       </div>
       <div class="main-form">
-        <app-card [showHeader]="false" class="auth-form-card" [padding]="40">
+        <app-card [showHeader]="false" class="auth-form-card" [padding]="40" style="min-width: 450px">
           <div class="text-center">
             <a href="javascript:">
-              <img src="assets/images/logo-dark.svg" alt="logo" />
+              <img src="assets/images/logo.png" alt="logo" />
             </a>
             <div class="login-with">
               @for (list of loginType; track list) {
-                <button mat-stroked-button class="m-t-10 text-muted">
-                  <div class="flex">
+                <p-button [outlined]="true" severity="secondary" class="mb-2 w-full" size="small">
+                  <div class="flex justify-content-center align-items-center w-100">
                     <img src="{{ list.image }}" alt="{{ list.alt }}" />
                     <span class="mat-body p-l-10">{{ list.title }}</span>
                   </div>
-                </button>
+                </p-button>
               }
             </div>
           </div>
           <div class="separator">
             <span>OR</span>
           </div>
-          <h4 class="text-center m-b-25 f-20 f-w-500">Login With Your Email</h4>
-          <div class="text-start">
-            <label for="name" class="f-w-500">Enter Your Email</label>
-            <mat-form-field appearance="outline" class="w-100 m-t-5">
-              <input matInput [formControl]="email" required [(ngModel)]="Email" />
-              @if (email.invalid) {
-                <mat-error>{{ getErrorMessage() }}</mat-error>
+
+          <form action="#" [formGroup]="formData" (ngSubmit)="handleSubmit()">
+            <h4 class="text-center m-b-25 f-20 f-w-500">Login With Your Account</h4>
+            <div class="flex flex-column gap-2 mb-4">
+              <label for="email">Enter your email</label>
+              <input pInputText id="email" aria-describedby="email-help" formControlName="email" (blur)="handleShowToast('email')" />
+              @if (emailIsInvalid) {
+                <small class="text-red-400"> Email is required </small>
               }
-            </mat-form-field>
-            <label for="name" class="f-w-500">Enter your password</label>
-            <mat-form-field appearance="outline" class="w-100 m-t-5">
-              <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="password" />
-              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
-              </button>
-            </mat-form-field>
-          </div>
-          <div class="check-me">
-            <mat-checkbox class="float-start" checked color="primary">Remember me?</mat-checkbox>
-            <a class="f-w-400 f-14 text-primary-500 m-b-0" href="javascript:">Forgot Password </a>
-          </div>
-          <div class="grid">
-            <button mat-flat-button color="primary" class="b-rad-20 m-t-15">Login</button>
-          </div>
-          <div class="check-me m-t-20">
-            <h6 class="f-w-400 text-muted m-b-0">Don't have an Account?</h6>
-            <a [routerLink]="['/auth/register']" class="text-primary-500">Create Account</a>
-          </div>
+            </div>
+            <div class="flex flex-column gap-2 mb-4">
+              <label for="password">Enter your password</label>
+              <input pInputText id="password" aria-describedby="password-help" formControlName="password" (blur)="handleShowToast('password')" />
+              <small>Password must be at least 6 characters long</small>
+              @if (passwordIsInvalid) {
+                <small class="text-red-400"> Password is required </small>
+              }
+            </div>
+
+            <div class="flex justify-content-between align-items-center mb-4">
+              <span>
+                <p-checkbox formControlName="remember" value="remember" inputId="rememberMe" />
+                <label class="ml-2" for="rememberMe">Remember me?</label>
+              </span>
+              <a class="f-w-400 f-14 text-blue-500 m-b-0 hover:underline" href="javascript:">Forgot Password</a>
+            </div>
+
+            <p-button label="Login" class="w-full" size="small" type="submit" [disabled]="formData.invalid" />
+          </form>
         </app-card>
       </div>
     </div>
