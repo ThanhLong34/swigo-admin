@@ -1,0 +1,10 @@
+{
+  "or": "Or",
+  "_languages": {
+    "vi": "Ngôn ngữ",
+    "en": "English"
+  },
+  "_buttons": {
+    "send": "send"
+  }
+}

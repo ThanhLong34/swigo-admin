@@ -10,11 +10,12 @@ import { LanguageSelectorComponent } from 'src/app/shared/language-selector/lang
 
 // primeNG import
 import { MessageService } from 'primeng/api';
+import { I18NextModule } from 'angular-i18next';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [SharedModule, RouterModule, ReactiveFormsModule, CommonModule, LanguageSelectorComponent],
+  imports: [SharedModule, RouterModule, ReactiveFormsModule, CommonModule, LanguageSelectorComponent, I18NextModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss', '../authentication.scss']
 })

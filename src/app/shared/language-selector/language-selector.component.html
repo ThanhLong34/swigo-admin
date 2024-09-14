@@ -1,4 +1,4 @@
-<p-dropdown [options]="languages" [(ngModel)]="selectedLanguage" optionLabel="name" [itemSize]="30" placeholder="Select a languages">
+<p-dropdown [options]="languages" [(ngModel)]="selectedLanguage" optionLabel="name" [itemSize]="30" placeholder="Select a languages" (onChange)="handleChangeLanguage()">
   <ng-template pTemplate="selectedItem">
     <div class="flex align-items-center gap-2" *ngIf="selectedLanguage">
       <img

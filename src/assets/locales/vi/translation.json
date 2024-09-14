@@ -1,0 +1,10 @@
+{
+  "or": "Hoặc",
+  "_languages": {
+    "vi": "Ngôn ngữ",
+    "en": "English"
+  },
+  "_buttons": {
+    "send": "gửi"
+  }
+}
