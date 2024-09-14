@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 // project import
 import { SharedModule } from 'src/app/demo/shared/shared.module';
+import { LanguageSelectorComponent } from 'src/app/shared/language-selector/language-selector.component';
 
 // primeNG import
 import { MessageService } from 'primeng/api';
@@ -13,7 +14,7 @@ import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [SharedModule, RouterModule, ReactiveFormsModule, CommonModule],
+  imports: [SharedModule, RouterModule, ReactiveFormsModule, CommonModule, LanguageSelectorComponent],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss', '../authentication.scss']
 })
