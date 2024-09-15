@@ -1,5 +1,5 @@
 // angular import
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, Validators, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -17,7 +17,7 @@ import { I18NextModule } from 'angular-i18next';
   standalone: true,
   imports: [SharedModule, RouterModule, ReactiveFormsModule, CommonModule, LanguageSelectorComponent, I18NextModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss', '../authentication.scss']
+  styleUrls: ['./login.component.scss', '../authentication.scss'],
 })
 export default class LoginComponent {
   loginType = [

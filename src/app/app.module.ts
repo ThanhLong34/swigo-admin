@@ -12,9 +12,22 @@ import { MessageService } from 'primeng/api';
 import { I18NextModule } from 'angular-i18next';
 import { I18N_PROVIDERS } from './i18n/i18n-provider';
 
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { appReducer } from './app.state';
+import { LanguageEffects } from './store/language/language.effects';
+
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, SharedModule, I18NextModule.forRoot()],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    SharedModule,
+    I18NextModule.forRoot(),
+    StoreModule.forRoot(appReducer),
+    EffectsModule.forRoot([LanguageEffects])
+  ],
   providers: [MessageService, I18N_PROVIDERS],
   bootstrap: [AppComponent]
 })

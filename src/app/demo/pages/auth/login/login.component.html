@@ -28,7 +28,7 @@
           </div>
 
           <form action="#" [formGroup]="formData" (ngSubmit)="handleSubmit()">
-            <h4 class="text-center m-b-25 f-20 f-w-500">Login With Your Account</h4>
+            <h4 class="text-center m-b-25 f-20 f-w-500">{{ 'login_form_title' | i18next }}</h4>
             <div class="flex flex-column gap-2 mb-4">
               <label for="email">Enter your email</label>
               <input pInputText id="email" aria-describedby="email-help" formControlName="email" (blur)="handleShowToast('email')" />

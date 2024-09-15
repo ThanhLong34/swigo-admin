@@ -1,10 +1,9 @@
-import { APP_INITIALIZER, LOCALE_ID, PLATFORM_ID, Provider } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { APP_INITIALIZER, LOCALE_ID, Provider } from '@angular/core';
 import {
   defaultInterpolationFormat,
   I18NEXT_SERVICE,
+  I18NextLoadResult,
   I18NextModule,
-  I18NextTitle,
   ITranslationService
 } from 'angular-i18next';
 import HttpApi from 'i18next-http-backend';
@@ -22,24 +21,16 @@ const i18nextOptions = {
   backend: {
     loadPath: 'assets/locales/{{lng}}/{{ns}}.json'
   },
-  detection: {
-    // order and from where user language should be detected
-    order: ['cookie'],
-
-    // keys or params to lookup language from
-    lookupCookie: 'lang',
-
-    // cache user language on
-    caches: ['cookie'],
-
-    // optional expire and domain for set cookie
-    cookieMinutes: 10080, // 7 days
-    // cookieDomain: I18NEXT_LANG_COOKIE_DOMAIN
-  }
 };
 
-export function appInit(i18next: ITranslationService, platformId: any) {
-  return () => i18next.use(HttpApi).use(LanguageDetector).init(i18nextOptions);
+export function appInit(i18next: ITranslationService) {
+  return () => {
+    const promise: Promise<I18NextLoadResult> = i18next
+      .use(HttpApi)
+      .use(LanguageDetector)
+      .init(i18nextOptions);
+    return promise;
+  };
 }
 
 export function localeIdFactory(i18next: ITranslationService) {
@@ -55,11 +46,7 @@ export const I18N_PROVIDERS: Provider[] = [
   },
   {
     provide: LOCALE_ID,
-    deps: [I18NEXT_SERVICE, PLATFORM_ID],
+    deps: [I18NEXT_SERVICE],
     useFactory: localeIdFactory
   },
-  {
-    provide: Title,
-    useExisting: I18NextTitle
-  }
 ];

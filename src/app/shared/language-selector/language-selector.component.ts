@@ -1,7 +1,9 @@
-import { Component, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/demo/shared/shared.module';
-import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
+import { AppState } from 'src/app/app.state';
+import { Store } from '@ngrx/store';
+import { changeLanguage } from 'src/app/store/language/language.actions';
 
 @Component({
   selector: 'app-language-selector',
@@ -14,16 +16,23 @@ import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
     class: 'language-selector'
   }
 })
-export class LanguageSelectorComponent {
+export class LanguageSelectorComponent implements OnInit {
   languages = [
     { name: 'English', code: 'en', image: 'assets/images/languages/united-kingdom.png' },
     { name: 'Tiếng Việt', code: 'vi', image: 'assets/images/languages/vietnam.png' },
   ]
   selectedLanguage = this.languages[0];
 
-  constructor(@Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService) {}
+  constructor(private store: Store<AppState>) {}
+
+  ngOnInit() {
+    const languageCodeSaved = localStorage.getItem('language');
+    const language = this.languages.find(lang => lang.code === languageCodeSaved)
+    this.selectedLanguage = language || this.languages[0];
+  }
 
   handleChangeLanguage() {
-    this.i18NextService.changeLanguage(this.selectedLanguage.code);
+    const lang = this.selectedLanguage.code
+    this.store.dispatch(changeLanguage({ language: lang }));
   }
 }
