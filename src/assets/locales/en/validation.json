@@ -1,6 +1,7 @@
 {
   "required": "Field is required",
   "email_invalid": "Email is invalid.",
+  "username_invalid": "Username is invalid.",
   "password_invalid": "Password is invalid.",
   "password_min_length": "Password must be at least 6 characters."
 }

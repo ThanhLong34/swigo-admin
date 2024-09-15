@@ -29,11 +29,18 @@
 
           <form action="#" [formGroup]="formData" (ngSubmit)="handleSubmit()">
             <h4 class="text-center m-b-25 f-20 f-w-500">{{ 'login_form_title' | i18next }}</h4>
-            <div class="flex flex-column gap-2 mb-4">
+            <!-- <div class="flex flex-column gap-2 mb-4">
               <label for="email">{{ 'enter_your_email' | i18next }}</label>
               <input pInputText id="email" aria-describedby="email-help" formControlName="email" (blur)="handleShowToast('email')" />
               @if (emailIsInvalid) {
                 <small class="text-red-400">{{ 'email_invalid' | i18nextNamespace: 'validation' }}</small>
+              }
+            </div> -->
+            <div class="flex flex-column gap-2 mb-4">
+              <label for="username">{{ 'enter_your_username' | i18next }}</label>
+              <input pInputText id="username" aria-describedby="username-help" formControlName="username" (blur)="handleShowToast('username')" />
+              @if (usernameIsInvalid) {
+                <small class="text-red-400">{{ 'username_invalid' | i18nextNamespace: 'validation' }}</small>
               }
             </div>
             <div class="flex flex-column gap-2 mb-4">

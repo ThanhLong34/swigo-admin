@@ -1,13 +1,16 @@
 {
   "or": "Hoặc",
-  "login_form_title": "Đăng Nhập Với Tài Khoản Của Bạn",
+  "login_form_title": "Đăng Nhập Với Tài Khoản",
   "sign_in_with_facebook": "Đăng nhập với Facebook",
   "sign_in_with_twitter": "Đăng nhập với Twitter",
   "sign_in_with_google": "Đăng nhập với Google",
-  "enter_your_email": "Nhập email của bạn",
-  "enter_your_password": "Nhập mật khẩu của bạn",
+  "enter_your_email": "Nhập địa chỉ email",
+  "enter_your_username": "Nhập tên đăng nhập",
+  "enter_your_password": "Nhập mật khẩu",
   "remember_me": "Ghi nhớ thông tin đăng nhập",
   "forgot_password": "Quên mật khẩu?",
   "login": "Đăng nhập",
-  "warning": "Cảnh báo"
+  "warning": "Cảnh báo",
+  "success": "Thành công",
+  "login_success": "Đăng nhập thành công"
 }

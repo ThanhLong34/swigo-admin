@@ -1,5 +1,5 @@
 // angular import
-import { NgModule } from '@angular/core';
+import { isDevMode, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 // project import
@@ -17,6 +17,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { appReducer } from './app.state';
 import { LanguageEffects } from './stores/language/language.effects';
 import { provideHttpClient } from '@angular/common/http';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +29,15 @@ import { provideHttpClient } from '@angular/common/http';
     I18NextModule.forRoot(),
     StoreModule.forRoot(appReducer),
     EffectsModule.forRoot([LanguageEffects]),
+    // Instrumentation must be imported after importing StoreModule (config is optional)
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: !isDevMode(), // Restrict extension to log-only mode
+      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+      trace: true, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
+      traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
+      connectInZone: true // If set to true, the connection is established within the Angular zone
+    }),
   ],
   providers: [MessageService, I18N_PROVIDERS, provideHttpClient()],
   bootstrap: [AppComponent]
