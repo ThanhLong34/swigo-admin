@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { changeLanguage } from './store/language/language.actions';
+import { changeLanguage } from './stores/language/language.actions';
 
 export interface AppState {
   language: string;

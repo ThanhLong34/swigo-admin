@@ -15,7 +15,8 @@ import { I18N_PROVIDERS } from './providers/i18next.provider';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { appReducer } from './app.state';
-import { LanguageEffects } from './store/language/language.effects';
+import { LanguageEffects } from './stores/language/language.effects';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,9 +27,9 @@ import { LanguageEffects } from './store/language/language.effects';
     SharedModule,
     I18NextModule.forRoot(),
     StoreModule.forRoot(appReducer),
-    EffectsModule.forRoot([LanguageEffects])
+    EffectsModule.forRoot([LanguageEffects]),
   ],
-  providers: [MessageService, I18N_PROVIDERS],
+  providers: [MessageService, I18N_PROVIDERS, provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

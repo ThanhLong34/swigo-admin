@@ -12,6 +12,7 @@ import { LanguageSelectorComponent } from 'src/app/shared/language-selector/lang
 import { MessageService } from 'primeng/api';
 import { I18NEXT_SERVICE, I18NextModule, ITranslationService } from 'angular-i18next';
 import { I18NextNamespacePipe } from 'src/app/pipes/i18next-namespace.pipe';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -42,12 +43,20 @@ export default class LoginComponent {
 
   constructor(
     private messageService: MessageService,
-    @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService
+    @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService,
+    private userService: UserService,
   ) {
     this.formData = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       remember: new FormControl(false)
+    });
+
+    this.userService.login({
+      username: 'admin',
+      password: '123456'
+    }).subscribe((res: any) => {
+      console.log(res);
     });
   }
 
