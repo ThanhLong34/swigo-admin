@@ -1,0 +1,6 @@
+{
+  "required": "Trường này là bắt buộc.",
+  "email_invalid": "Email không hợp lệ.",
+  "password_invalid": "Mật khẩu không hợp lệ.",
+  "password_min_length": "Mật khẩu phải chứa ít nhất 6 ký tự."
+}

@@ -1,4 +1,5 @@
 <div class="auth-main">
+  <app-language-selector />
   <div class="auth-wrapper version-1">
     <div class="auth-form">
       <div class="auth-background">
@@ -23,36 +24,36 @@
             </div>
           </div>
           <div class="separator">
-            <span>OR</span>
+            <span>{{ 'or' | i18next }}</span>
           </div>
 
           <form action="#" [formGroup]="formData" (ngSubmit)="handleSubmit()">
-            <h4 class="text-center m-b-25 f-20 f-w-500">Login With Your Account</h4>
+            <h4 class="text-center m-b-25 f-20 f-w-500">{{ 'login_form_title' | i18next }}</h4>
             <div class="flex flex-column gap-2 mb-4">
-              <label for="email">Enter your email</label>
+              <label for="email">{{ 'enter_your_email' | i18next }}</label>
               <input pInputText id="email" aria-describedby="email-help" formControlName="email" (blur)="handleShowToast('email')" />
               @if (emailIsInvalid) {
-                <small class="text-red-400"> Email is required </small>
+                <small class="text-red-400">{{ 'email_invalid' | i18nextNamespace: 'validation' }}</small>
               }
             </div>
             <div class="flex flex-column gap-2 mb-4">
-              <label for="password">Enter your password</label>
+              <label for="password">{{ 'enter_your_password' | i18next }}</label>
               <input pInputText id="password" aria-describedby="password-help" formControlName="password" (blur)="handleShowToast('password')" />
-              <small>Password must be at least 6 characters long</small>
+              <small>{{ 'password_min_length' | i18nextNamespace: 'validation' }}</small>
               @if (passwordIsInvalid) {
-                <small class="text-red-400"> Password is required </small>
+                <small class="text-red-400">{{ 'password_invalid' | i18nextNamespace: 'validation' }}</small>
               }
             </div>
 
             <div class="flex justify-content-between align-items-center mb-4">
               <span>
                 <p-checkbox formControlName="remember" value="remember" inputId="rememberMe" />
-                <label class="ml-2" for="rememberMe">Remember me?</label>
+                <label class="ml-2" for="rememberMe">{{ 'remember_me' | i18next }}?</label>
               </span>
-              <a class="f-w-400 f-14 text-blue-500 m-b-0 hover:underline" href="javascript:">Forgot Password</a>
+              <a class="f-w-400 f-14 text-blue-500 m-b-0 hover:underline" href="javascript:">{{ 'forgot_password' | i18next }}</a>
             </div>
 
-            <p-button label="Login" class="w-full" size="small" type="submit" [disabled]="formData.invalid" />
+            <p-button [label]="'login' | i18next" class="w-full" size="small" type="submit" [disabled]="formData.invalid" />
           </form>
         </app-card>
       </div>
