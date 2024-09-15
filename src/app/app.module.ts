@@ -15,7 +15,11 @@ import { I18N_PROVIDERS } from './providers/i18next.provider';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { appReducer } from './app.state';
+
+// NgRx effects
 import { LanguageEffects } from './stores/language/language.effects';
+import { UserEffects } from './stores/user/user.effects';
+
 import { provideHttpClient } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -28,7 +32,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     SharedModule,
     I18NextModule.forRoot(),
     StoreModule.forRoot(appReducer),
-    EffectsModule.forRoot([LanguageEffects]),
+    EffectsModule.forRoot([LanguageEffects, UserEffects]),
     // Instrumentation must be imported after importing StoreModule (config is optional)
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states

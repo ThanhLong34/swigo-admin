@@ -52,16 +52,10 @@ export default class LoginComponent {
     private store: Store<AppState>
   ) {
     this.formData = new FormGroup({
-      // email: new FormControl('', [Validators.required, Validators.email]),
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       remember: new FormControl(false)
     });
-  }
-
-  get emailIsInvalid() {
-    const emailCtrl = this.formData.controls['email'];
-    return emailCtrl.touched && emailCtrl.dirty && emailCtrl.invalid;
   }
 
   get usernameIsInvalid() {
@@ -83,13 +77,7 @@ export default class LoginComponent {
       })
       .subscribe((res) => {
         if (res.code === 0) {
-          // Save to local storage
-          if (remember) {
-            localStorage.setItem('userLogin', JSON.stringify(res.data));
-          }
-
-          // Save to ngrx
-          this.store.dispatch(login({ user: res.data }));
+          this.store.dispatch(login({ user: res.data, remember }));
 
           this.messageService.add({
             severity: 'success',
@@ -115,13 +103,11 @@ export default class LoginComponent {
 
   handleShowToast(inputType: string) {
     const errorMessages = {
-      email: 'email_invalid',
       username: 'username_invalid',
       password: 'password_invalid'
     };
 
     const invalidFlags = {
-      email: this.emailIsInvalid,
       username: this.usernameIsInvalid,
       password: this.passwordIsInvalid
     };
