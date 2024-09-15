@@ -1,3 +1,4 @@
 {
-  "required": "Trường này là bắt buộc."
+  "required": "Trường này là bắt buộc.",
+  "password_min_length": "Mật khẩu phải chứa ít nhất 6 ký tự."
 }

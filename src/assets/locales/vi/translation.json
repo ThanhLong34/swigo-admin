@@ -1,11 +1,9 @@
 {
   "or": "Hoặc",
   "login_form_title": "Đăng Nhập Với Tài Khoản Của Bạn",
-  "_languages": {
-    "vi": "Ngôn ngữ",
-    "en": "English"
-  },
-  "_buttons": {
-    "send": "gửi"
-  }
+  "sign_in_with_facebook": "Đăng nhập với Facebook",
+  "sign_in_with_twitter": "Đăng nhập với Twitter",
+  "sign_in_with_google": "Đăng nhập với Google",
+  "enter_your_email": "Nhập email của bạn",
+  "enter_your_password": "Nhập mật khẩu của bạn"
 }

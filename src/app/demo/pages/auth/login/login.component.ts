@@ -1,5 +1,5 @@
 // angular import
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, Validators, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -10,36 +10,40 @@ import { LanguageSelectorComponent } from 'src/app/shared/language-selector/lang
 
 // primeNG import
 import { MessageService } from 'primeng/api';
-import { I18NextModule } from 'angular-i18next';
+import { I18NEXT_SERVICE, I18NextModule, ITranslationService } from 'angular-i18next';
+import { I18NextNamespacePipe } from 'src/app/pipes/i18next-namespace.pipe';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [SharedModule, RouterModule, ReactiveFormsModule, CommonModule, LanguageSelectorComponent, I18NextModule],
+  imports: [SharedModule, RouterModule, ReactiveFormsModule, CommonModule, LanguageSelectorComponent, I18NextModule, I18NextNamespacePipe],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss', '../authentication.scss'],
+  styleUrls: ['./login.component.scss', '../authentication.scss']
 })
 export default class LoginComponent {
   loginType = [
     {
       image: 'assets/images/authentication/facebook.svg',
       alt: 'facebook',
-      title: 'Sign In with Facebook'
+      title: this.i18NextService.t('sign_in_with_facebook', {})
     },
     {
       image: 'assets/images/authentication/twitter.svg',
       alt: 'twitter',
-      title: 'Sign In with Twitter'
+      title: this.i18NextService.t('sign_in_with_twitter')
     },
     {
       image: 'assets/images/authentication/google.svg',
       alt: 'google',
-      title: 'Sign In with Google'
+      title: this.i18NextService.t('sign_in_with_google')
     }
   ];
   formData!: FormGroup;
 
-  constructor(private messageService: MessageService) {
+  constructor(
+    private messageService: MessageService,
+    @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService
+  ) {
     this.formData = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -57,9 +61,7 @@ export default class LoginComponent {
     return passwordCtrl.touched && passwordCtrl.dirty && passwordCtrl.invalid;
   }
 
-  handleSubmit() {
-
-  }
+  handleSubmit() {}
 
   handleShowToast(inputType: string) {
     if (inputType === 'email' && this.emailIsInvalid) {

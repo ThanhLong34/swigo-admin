@@ -10,7 +10,7 @@ import { SharedModule } from './demo/shared/shared.module';
 import { MessageService } from 'primeng/api';
 
 import { I18NextModule } from 'angular-i18next';
-import { I18N_PROVIDERS } from './i18n/i18n-provider';
+import { I18N_PROVIDERS } from './providers/i18next.provider';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';

@@ -1,11 +1,9 @@
 {
   "or": "Or",
   "login_form_title": "Login With Your Account",
-  "_languages": {
-    "vi": "Ngôn ngữ",
-    "en": "English"
-  },
-  "_buttons": {
-    "send": "send"
-  }
+  "sign_in_with_facebook": "Sign In with Facebook",
+  "sign_in_with_twitter": "Sign In with Twitter",
+  "sign_in_with_google": "Sign In with Google",
+  "enter_your_email": "Enter your email",
+  "enter_your_password": "Enter your password"
 }

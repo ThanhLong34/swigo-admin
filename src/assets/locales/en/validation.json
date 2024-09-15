@@ -1,3 +1,4 @@
 {
-  "required": "Field is required."
+  "required": "Field is required",
+  "password_min_length": "Password must be at least 6 characters."
 }

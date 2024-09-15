@@ -1,6 +1,7 @@
 import { APP_INITIALIZER, LOCALE_ID, Provider } from '@angular/core';
 import {
   defaultInterpolationFormat,
+  I18NEXT_NAMESPACE,
   I18NEXT_SERVICE,
   I18NextLoadResult,
   I18NextModule,
