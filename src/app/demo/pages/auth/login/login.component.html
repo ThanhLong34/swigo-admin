@@ -33,7 +33,7 @@
               <label for="email">{{ 'enter_your_email' | i18next }}</label>
               <input pInputText id="email" aria-describedby="email-help" formControlName="email" (blur)="handleShowToast('email')" />
               @if (emailIsInvalid) {
-                <small class="text-red-400">{{ 'email' | i18next }}</small>
+                <small class="text-red-400">{{ 'email_invalid' | i18nextNamespace: 'validation' }}</small>
               }
             </div>
             <div class="flex flex-column gap-2 mb-4">
@@ -41,19 +41,19 @@
               <input pInputText id="password" aria-describedby="password-help" formControlName="password" (blur)="handleShowToast('password')" />
               <small>{{ 'password_min_length' | i18nextNamespace: 'validation' }}</small>
               @if (passwordIsInvalid) {
-                <small class="text-red-400"> Password is required </small>
+                <small class="text-red-400">{{ 'password_invalid' | i18nextNamespace: 'validation' }}</small>
               }
             </div>
 
             <div class="flex justify-content-between align-items-center mb-4">
               <span>
                 <p-checkbox formControlName="remember" value="remember" inputId="rememberMe" />
-                <label class="ml-2" for="rememberMe">Remember me?</label>
+                <label class="ml-2" for="rememberMe">{{ 'remember_me' | i18next }}?</label>
               </span>
-              <a class="f-w-400 f-14 text-blue-500 m-b-0 hover:underline" href="javascript:">Forgot Password</a>
+              <a class="f-w-400 f-14 text-blue-500 m-b-0 hover:underline" href="javascript:">{{ 'forgot_password' | i18next }}</a>
             </div>
 
-            <p-button label="Login" class="w-full" size="small" type="submit" [disabled]="formData.invalid" />
+            <p-button [label]="'login' | i18next" class="w-full" size="small" type="submit" [disabled]="formData.invalid" />
           </form>
         </app-card>
       </div>

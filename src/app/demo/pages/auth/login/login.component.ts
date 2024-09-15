@@ -65,10 +65,22 @@ export default class LoginComponent {
 
   handleShowToast(inputType: string) {
     if (inputType === 'email' && this.emailIsInvalid) {
-      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Email is invalid' });
+      this.messageService.add({
+        severity: 'warn',
+        summary: this.i18NextService.t('warning'),
+        detail: this.i18NextService.t('email_invalid', {
+          ns: 'validation'
+        })
+      });
     }
     if (inputType === 'password' && this.passwordIsInvalid) {
-      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Password is invalid' });
+      this.messageService.add({
+        severity: 'warn',
+        summary: this.i18NextService.t('warning'),
+        detail: this.i18NextService.t('password_invalid', {
+          ns: 'validation'
+        })
+      });
     }
   }
 }
