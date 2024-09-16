@@ -12,5 +12,7 @@
   "login": "Đăng nhập",
   "warning": "Cảnh báo",
   "success": "Thành công",
-  "login_success": "Đăng nhập thành công"
+  "login_success": "Đăng nhập thành công",
+  "there_is_nothing_here": "Không có gì ở đây",
+  "go_to_dashboard": "Đi đến Bảng điều khiển"
 }

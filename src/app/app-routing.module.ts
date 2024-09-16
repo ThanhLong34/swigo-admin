@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 // project import
 import { AdminComponent } from './demo/layout/admin';
 import { EmptyComponent } from './demo/layout/empty';
+import { PageNotFoundComponent } from './demo/pages/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -38,7 +39,8 @@ const routes: Routes = [
         loadChildren: () => import('./demo/pages/auth/auth.module').then((m) => m.AuthModule)
       }
     ]
-  }
+  },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
