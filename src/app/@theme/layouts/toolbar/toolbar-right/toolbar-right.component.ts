@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
+import { AuthService } from 'src/app/services/auth.service';
 import { logout } from 'src/app/stores/user/user.actions';
 
 @Component({
@@ -77,9 +78,10 @@ export class NavRightComponent {
     }
   ];
 
-  constructor(private router: Router, private store: Store<AppState>) {}
+  constructor(private router: Router, private store: Store<AppState>, private authService: AuthService) {}
 
   handleSignOut() {
+    this.authService.userLoggedIn = null;
     this.store.dispatch(logout());
     this.router.navigate(['/auth/login'], {
       replaceUrl: true

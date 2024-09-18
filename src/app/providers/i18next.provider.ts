@@ -13,7 +13,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 const i18nextOptions = {
   supportedLngs: ['en', 'vi'],
   fallbackLng: 'en',
-  debug: true,
+  debug: false,
   returnEmptyString: false,
   ns: ['translation', 'validation', 'error'],
   interpolation: {

@@ -12,10 +12,10 @@ import { LanguageSelectorComponent } from 'src/app/shared/language-selector/lang
 import { MessageService } from 'primeng/api';
 import { I18NEXT_SERVICE, I18NextModule, ITranslationService } from 'angular-i18next';
 import { I18NextNamespacePipe } from 'src/app/pipes/i18next-namespace.pipe';
-import { UserService } from 'src/app/services/user.service';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { login } from 'src/app/stores/user/user.actions';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +29,7 @@ export default class LoginComponent {
     {
       image: 'assets/images/authentication/facebook.svg',
       alt: 'facebook',
-      title: this.i18NextService.t('sign_in_with_facebook', {})
+      title: this.i18NextService.t('sign_in_with_facebook')
     },
     {
       image: 'assets/images/authentication/twitter.svg',
@@ -47,7 +47,7 @@ export default class LoginComponent {
   constructor(
     private messageService: MessageService,
     @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService,
-    private userService: UserService,
+    private authService: AuthService,
     private router: Router,
     private store: Store<AppState>
   ) {
@@ -70,22 +70,20 @@ export default class LoginComponent {
 
   handleSubmit() {
     const { username, password, remember } = this.formData.value;
-    this.userService
+    this.authService
       .login({
         username,
         password
       })
       .subscribe((res) => {
         if (res.code === 0) {
+          this.authService.userLoggedIn = res.data;
           this.store.dispatch(login({ user: res.data, remember }));
-
           this.messageService.add({
             severity: 'success',
             summary: this.i18NextService.t('success'),
             detail: this.i18NextService.t('login_success')
           });
-
-          // navigato to dashboard
           this.router.navigate(['/']);
         } else {
           this.messageService.add({

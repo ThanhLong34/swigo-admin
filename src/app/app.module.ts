@@ -31,7 +31,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     BrowserAnimationsModule,
     SharedModule,
     I18NextModule.forRoot(),
-    StoreModule.forRoot(appReducer),
+    StoreModule.forRoot({ app: appReducer }),
     EffectsModule.forRoot([LanguageEffects, UserEffects]),
     // Instrumentation must be imported after importing StoreModule (config is optional)
     StoreDevtoolsModule.instrument({

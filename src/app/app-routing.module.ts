@@ -5,11 +5,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './demo/layout/admin';
 import { EmptyComponent } from './demo/layout/empty';
 import { PageNotFoundComponent } from './demo/pages/page-not-found/page-not-found.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: AdminComponent,
+    canActivateChild: [AuthGuard],
     children: [
       {
         path: '',

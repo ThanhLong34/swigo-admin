@@ -7,8 +7,22 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class AuthService {
   private apiUrl = environment.apiUrl + '/users';
+  private _isLoggedIn = false;
+  private _userLoggedIn: User | null = null;
+
+  get userLoggedIn() {
+    return this._userLoggedIn;
+  }
+  set userLoggedIn(user: User | null) {
+    this._userLoggedIn = user;
+    this._isLoggedIn = !!user && !!user.id;
+  }
+
+  get isLoggedIn() {
+    return this._isLoggedIn;
+  }
 
   constructor(private http: HttpClient) {}
 
