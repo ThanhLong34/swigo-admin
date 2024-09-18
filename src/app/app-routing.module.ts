@@ -4,11 +4,14 @@ import { RouterModule, Routes } from '@angular/router';
 // project import
 import { AdminComponent } from './demo/layout/admin';
 import { EmptyComponent } from './demo/layout/empty';
+import { PageNotFoundComponent } from './demo/pages/page-not-found/page-not-found.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: AdminComponent,
+    canActivateChild: [AuthGuard],
     children: [
       {
         path: '',
@@ -38,7 +41,8 @@ const routes: Routes = [
         loadChildren: () => import('./demo/pages/auth/auth.module').then((m) => m.AuthModule)
       }
     ]
-  }
+  },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

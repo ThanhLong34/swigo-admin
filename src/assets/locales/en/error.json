@@ -1,3 +1,5 @@
 {
-  "oops": "Oops!"
+  "oops": "Oops!",
+  "error": "Error",
+  "login_failed": "Login failed, please check your login information"
 }

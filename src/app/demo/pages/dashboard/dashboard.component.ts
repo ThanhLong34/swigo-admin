@@ -71,29 +71,6 @@ export default class DashboardComponent {
   monthlyColor = ['#4680FF', '#8996a4'];
   incomeColors = ['#4680FF', '#E58A00', '#2CA87F', '#b5ccff'];
 
-  // constructor
-  constructor() {
-    this.chartDB = ChartDB;
-    const {
-      earningChart,
-      totalTaskChart,
-      downloadChart,
-      totalTasksChart,
-      pageViewChart,
-      monthlyRevenueChart,
-      pendingTasksChart,
-      totalIncomeChart
-    } = this.chartDB;
-    this.earningChart = earningChart;
-    this.pageViewChart = pageViewChart;
-    this.totalTaskChart = totalTaskChart;
-    this.downloadChart = downloadChart;
-    this.monthlyRevenueChart = monthlyRevenueChart;
-    this.totalTasksChart = totalTasksChart;
-    this.pendingTasksChart = pendingTasksChart;
-    this.totalIncomeChart = totalIncomeChart;
-  }
-
   // public method
   project = [
     {
@@ -187,4 +164,27 @@ export default class DashboardComponent {
       number: '+$763,43'
     }
   ];
+
+  // constructor
+  constructor() {
+    this.chartDB = ChartDB;
+    const {
+      earningChart,
+      totalTaskChart,
+      downloadChart,
+      totalTasksChart,
+      pageViewChart,
+      monthlyRevenueChart,
+      pendingTasksChart,
+      totalIncomeChart
+    } = this.chartDB;
+    this.earningChart = earningChart;
+    this.pageViewChart = pageViewChart;
+    this.totalTaskChart = totalTaskChart;
+    this.downloadChart = downloadChart;
+    this.monthlyRevenueChart = monthlyRevenueChart;
+    this.totalTasksChart = totalTasksChart;
+    this.pendingTasksChart = pendingTasksChart;
+    this.totalIncomeChart = totalIncomeChart;
+  }
 }

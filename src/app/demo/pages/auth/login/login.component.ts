@@ -2,7 +2,7 @@
 import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, Validators, ReactiveFormsModule, FormGroup } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 // project import
 import { SharedModule } from 'src/app/demo/shared/shared.module';
@@ -12,6 +12,10 @@ import { LanguageSelectorComponent } from 'src/app/shared/language-selector/lang
 import { MessageService } from 'primeng/api';
 import { I18NEXT_SERVICE, I18NextModule, ITranslationService } from 'angular-i18next';
 import { I18NextNamespacePipe } from 'src/app/pipes/i18next-namespace.pipe';
+import { AppState } from 'src/app/app.state';
+import { Store } from '@ngrx/store';
+import { login } from 'src/app/stores/user/user.actions';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +29,7 @@ export default class LoginComponent {
     {
       image: 'assets/images/authentication/facebook.svg',
       alt: 'facebook',
-      title: this.i18NextService.t('sign_in_with_facebook', {})
+      title: this.i18NextService.t('sign_in_with_facebook')
     },
     {
       image: 'assets/images/authentication/twitter.svg',
@@ -42,18 +46,21 @@ export default class LoginComponent {
 
   constructor(
     private messageService: MessageService,
-    @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService
+    @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService,
+    private authService: AuthService,
+    private router: Router,
+    private store: Store<AppState>
   ) {
     this.formData = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
+      username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       remember: new FormControl(false)
     });
   }
 
-  get emailIsInvalid() {
-    const emailCtrl = this.formData.controls['email'];
-    return emailCtrl.touched && emailCtrl.dirty && emailCtrl.invalid;
+  get usernameIsInvalid() {
+    const usernameCtrl = this.formData.controls['username'];
+    return usernameCtrl.touched && usernameCtrl.dirty && usernameCtrl.invalid;
   }
 
   get passwordIsInvalid() {
@@ -61,23 +68,53 @@ export default class LoginComponent {
     return passwordCtrl.touched && passwordCtrl.dirty && passwordCtrl.invalid;
   }
 
-  handleSubmit() {}
+  handleSubmit() {
+    const { username, password, remember } = this.formData.value;
+    this.authService
+      .login({
+        username,
+        password
+      })
+      .subscribe((res) => {
+        if (res.code === 0) {
+          this.authService.userLoggedIn = res.data;
+          this.store.dispatch(login({ user: res.data, remember }));
+          this.messageService.add({
+            severity: 'success',
+            summary: this.i18NextService.t('success'),
+            detail: this.i18NextService.t('login_success')
+          });
+          this.router.navigate(['/']);
+        } else {
+          this.messageService.add({
+            severity: 'error',
+            summary: this.i18NextService.t('error', {
+              ns: 'error'
+            }),
+            detail: this.i18NextService.t('login_failed', {
+              ns: 'error'
+            })
+          });
+        }
+      });
+  }
 
   handleShowToast(inputType: string) {
-    if (inputType === 'email' && this.emailIsInvalid) {
+    const errorMessages = {
+      username: 'username_invalid',
+      password: 'password_invalid'
+    };
+
+    const invalidFlags = {
+      username: this.usernameIsInvalid,
+      password: this.passwordIsInvalid
+    };
+
+    if (errorMessages[inputType as keyof typeof errorMessages] && invalidFlags[inputType as keyof typeof invalidFlags]) {
       this.messageService.add({
         severity: 'warn',
         summary: this.i18NextService.t('warning'),
-        detail: this.i18NextService.t('email_invalid', {
-          ns: 'validation'
-        })
-      });
-    }
-    if (inputType === 'password' && this.passwordIsInvalid) {
-      this.messageService.add({
-        severity: 'warn',
-        summary: this.i18NextService.t('warning'),
-        detail: this.i18NextService.t('password_invalid', {
+        detail: this.i18NextService.t(errorMessages[inputType as keyof typeof errorMessages], {
           ns: 'validation'
         })
       });

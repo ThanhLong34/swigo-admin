@@ -1,3 +1,5 @@
 {
-  "oops": "Ôi không!"
+  "oops": "Ôi không!",
+  "error": "Lỗi",
+  "login_failed": "Đăng nhập thất bại, vui lòng kiểm tra lại thông tin đăng nhập"
 }

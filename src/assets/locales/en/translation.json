@@ -5,9 +5,14 @@
   "sign_in_with_twitter": "Sign In with Twitter",
   "sign_in_with_google": "Sign In with Google",
   "enter_your_email": "Enter your email",
+  "enter_your_username": "Enter your username",
   "enter_your_password": "Enter your password",
   "remember_me": "Remember me",
   "forgot_password": "Forgot password?",
   "login": "Login",
-  "warning": "Warning"
+  "warning": "Warning",
+  "success": "Success",
+  "login_success": "Login success",
+  "there_is_nothing_here": "There is nothing here",
+  "go_to_dashboard": "Go to Dashboard"
 }

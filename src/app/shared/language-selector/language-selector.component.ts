@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/demo/shared/shared.module';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
-import { changeLanguage } from 'src/app/store/language/language.actions';
+import { changeLanguage } from 'src/app/stores/language/language.actions';
 
 @Component({
   selector: 'app-language-selector',
