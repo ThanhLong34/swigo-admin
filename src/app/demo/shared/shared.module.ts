@@ -28,6 +28,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ToastModule } from 'primeng/toast';
 import { DropdownModule } from 'primeng/dropdown';
+import { TableModule } from 'primeng/table';
 
 // project
 import { CardComponent } from 'src/app/@theme/components/card/card.component';
@@ -54,7 +55,7 @@ const MaterialModules = [
   MatTooltipModule
 ];
 
-const PrimeNGModules = [ButtonModule, InputTextModule, FloatLabelModule, CheckboxModule, ToastModule, DropdownModule];
+const PrimeNGModules = [ButtonModule, InputTextModule, FloatLabelModule, CheckboxModule, ToastModule, DropdownModule, TableModule];
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, NgScrollbarModule, CardComponent, MaterialModules, PrimeNGModules],
