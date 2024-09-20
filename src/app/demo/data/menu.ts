@@ -13,7 +13,7 @@ export const menus: Navigation[] = [
         type: 'item',
         classes: 'nav-item',
         url: '/dashboard',
-        icon: '#custom-status-up'
+        icon: 'pi-home'
       }
     ]
   },
@@ -24,12 +24,12 @@ export const menus: Navigation[] = [
     icon: 'icon-navigation',
     children: [
       {
-        id: 'Dashboard',
-        title: 'Dashboard',
+        id: 'Users',
+        title: 'Users',
         type: 'item',
         classes: 'nav-item',
-        url: '/dashboard',
-        icon: '#custom-status-up'
+        url: '/users',
+        icon: 'pi-user'
       }
     ]
   },
@@ -38,80 +38,35 @@ export const menus: Navigation[] = [
     title: 'Customer',
     type: 'group',
     icon: 'icon-navigation',
-    children: [
-      {
-        id: 'Dashboard',
-        title: 'Dashboard',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/dashboard',
-        icon: '#custom-status-up'
-      }
-    ]
+    children: []
   },
   {
     id: 'order',
     title: 'Order',
     type: 'group',
     icon: 'icon-navigation',
-    children: [
-      {
-        id: 'Dashboard',
-        title: 'Dashboard',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/dashboard',
-        icon: '#custom-status-up'
-      }
-    ]
+    children: []
   },
   {
     id: 'production',
     title: 'Production',
     type: 'group',
     icon: 'icon-navigation',
-    children: [
-      {
-        id: 'Dashboard',
-        title: 'Dashboard',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/dashboard',
-        icon: '#custom-status-up'
-      }
-    ]
+    children: []
   },
   {
     id: 'news',
     title: 'News',
     type: 'group',
     icon: 'icon-navigation',
-    children: [
-      {
-        id: 'Dashboard',
-        title: 'Dashboard',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/dashboard',
-        icon: '#custom-status-up'
-      }
-    ]
+    children: []
   },
   {
     id: 'hr',
     title: 'Human Resource',
     type: 'group',
     icon: 'icon-navigation',
-    children: [
-      {
-        id: 'Dashboard',
-        title: 'Dashboard',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/dashboard',
-        icon: '#custom-status-up'
-      }
-    ]
+    children: []
   },
   {
     id: 'ui-example',
@@ -125,7 +80,7 @@ export const menus: Navigation[] = [
         type: 'item',
         classes: 'nav-item',
         url: '/auth/login',
-        icon: '#custom-shield',
+        icon: 'pi-sign-in',
         target: true,
         breadcrumbs: false
       },
@@ -135,7 +90,7 @@ export const menus: Navigation[] = [
         type: 'item',
         classes: 'nav-item',
         url: '/auth/register',
-        icon: '#custom-password-check',
+        icon: 'pi-sign-out',
         target: true,
         breadcrumbs: false
       },
