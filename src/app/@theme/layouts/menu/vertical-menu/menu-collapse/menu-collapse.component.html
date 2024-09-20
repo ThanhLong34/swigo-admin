@@ -1,11 +1,7 @@
 <li data-username="able-pro dashboard" class="nav-item coded-hasmenu" [routerLinkActive]="['active']">
   <a [routerLinkActive]="['active']" class="nav-link" (click)="navCollapse($event)" aria-hidden="true">
     @if (item.icon) {
-      <span class="coded-micon">
-        <svg class="pc-icon">
-          <use attr.xlink:href="assets/fonts/custom-icon.svg{{ item.icon }}"></use>
-        </svg>
-      </span>
+      <i [class]="'pi ' + item.icon" style="font-size: 1rem; margin-right: 6px;"></i>
     }
     <span class="coded-mtext">{{ item.title }} </span>
   </a>

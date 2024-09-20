@@ -100,7 +100,7 @@ export const menus: Navigation[] = [
         type: 'item',
         classes: 'nav-item',
         url: '/component/typography',
-        icon: '#custom-text-block'
+        icon: 'pi-language'
       },
       {
         id: 'color',
@@ -108,7 +108,7 @@ export const menus: Navigation[] = [
         type: 'item',
         classes: 'nav-item',
         url: '/component/color',
-        icon: '#custom-clipboard'
+        icon: 'pi-palette'
       },
       {
         id: 'table',
@@ -116,7 +116,7 @@ export const menus: Navigation[] = [
         type: 'item',
         classes: 'nav-item',
         url: 'https://tabler-icons.io/',
-        icon: '#custom-mouse-circle',
+        icon: 'pi-table',
         target: true,
         external: true
       },
@@ -124,7 +124,7 @@ export const menus: Navigation[] = [
         id: 'menu-levels',
         title: 'Menu levels',
         type: 'collapse',
-        icon: '#custom-level',
+        icon: 'pi-ellipsis-v',
         children: [
           {
             id: 'level-2-1',
@@ -220,7 +220,7 @@ export const menus: Navigation[] = [
         type: 'item',
         classes: 'nav-item',
         url: '/sample-page',
-        icon: '#custom-notification-status'
+        icon: 'pi-circle-off'
       }
     ]
   },
