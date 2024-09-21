@@ -14,7 +14,10 @@
       <td>{{ item.email }}</td>
       <td>{{ item.nickName }}</td>
       <td>{{ item.uuid }}</td>
-      <td>{{ item.createdAt }}</td>
+      <td>{{ item.createdAt | date: 'short' }}</td>
     </tr>
+  </ng-template>
+  <ng-template pTemplate="createDialog">
+    <span class="p-text-secondary block mb-5">Update your information.</span>
   </ng-template>
 </app-table-data>

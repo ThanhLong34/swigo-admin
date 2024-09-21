@@ -31,6 +31,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
 import { FileUploadModule } from 'primeng/fileupload';
+import { DialogModule } from 'primeng/dialog';
 
 // project
 import { CardComponent } from 'src/app/@theme/components/card/card.component';
@@ -66,7 +67,8 @@ const PrimeNGModules = [
   DropdownModule,
   TableModule,
   ToolbarModule,
-  FileUploadModule
+  FileUploadModule,
+  DialogModule,
 ];
 
 @NgModule({
