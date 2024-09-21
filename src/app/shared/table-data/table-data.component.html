@@ -1,0 +1,26 @@
+<app-card [showHeader]="false">
+  <div class="mb-3">
+    <p-button severity="primary" label="New" icon="pi pi-plus" size="small" class="mr-2" (onClick)="openCreateDialog()" />
+    <p-button
+      severity="danger"
+      label="Batch delete"
+      icon="pi pi-trash"
+      size="small"
+      (onClick)="deleteSelectedData()"
+      [disabled]="!selectedData || !selectedData.length"
+    />
+  </div>
+
+  <p-table [value]="data" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-gridlines" [(selection)]="selectedData">
+    <ng-template pTemplate="header">
+      <ng-container *ngIf="headerTemplate">
+        <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+      </ng-container>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <ng-container *ngIf="bodyTemplate">
+        <ng-container *ngTemplateOutlet="bodyTemplate; context: { $implicit: item }"></ng-container>
+      </ng-container>
+    </ng-template>
+  </p-table>
+</app-card>
