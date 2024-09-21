@@ -14,5 +14,10 @@
   "success": "Success",
   "login_success": "Login success",
   "there_is_nothing_here": "There is nothing here",
-  "go_to_dashboard": "Go to Dashboard"
+  "go_to_dashboard": "Go to Dashboard",
+  "create_or_update_user_form_username": "Username",
+  "create_or_update_user_form_email": "Email",
+  "create_or_update_user_form_password": "Password",
+  "create_or_update_user_form_nick_name": "Nick name",
+  "create_or_update_user_dialog_title": "Create or Update User"
 }

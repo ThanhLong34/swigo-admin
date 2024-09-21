@@ -29,12 +29,12 @@ export class TableDataComponent implements AfterContentInit {
   }
 
   // Outputs
-  @Output() createDialogSubmit = new EventEmitter();
+  @Output() createData = new EventEmitter();
+  @Output() batchDeleteData = new EventEmitter();
 
   // Templates
   headerTemplate: Nullable<TemplateRef<any>>;
   bodyTemplate: Nullable<TemplateRef<any>>;
-  createOrUpdateDialogTemplate: Nullable<TemplateRef<any>>;
   @ContentChildren(PrimeTemplate) templates: Nullable<QueryList<PrimeTemplate>>;
 
   //! Constructor
@@ -49,25 +49,15 @@ export class TableDataComponent implements AfterContentInit {
         case 'body':
           this.bodyTemplate = item.template;
           break;
-        case 'createOrUpdateDialog':
-          this.createOrUpdateDialogTemplate = item.template;
-          break;
       }
     });
   }
 
-  openCreateDialog() {
-    this.createDialogProps.visible = true;
+  deleteSelectedDataFunc() {
+    this.batchDeleteData.emit();
   }
 
-  closeCreateDialog() {
-    this.createDialogProps.visible = false;
+  createDataFunc() {
+    this.createData.emit();
   }
-
-  submitCreateDialog() {
-    this.closeCreateDialog();
-    this.createDialogSubmit.emit();
-  }
-
-  deleteSelectedData() {}
 }

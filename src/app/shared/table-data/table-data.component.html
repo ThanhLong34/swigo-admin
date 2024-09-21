@@ -6,14 +6,14 @@
       icon="pi pi-plus"
       size="small"
       class="mr-2"
-      (onClick)="openCreateDialog()"
+      (onClick)="createDataFunc()"
     />
     <p-button
       severity="danger"
       [label]="tableProps.batchDeleteBtnText"
       icon="pi pi-trash"
       size="small"
-      (onClick)="deleteSelectedData()"
+      (onClick)="deleteSelectedDataFunc()"
       [disabled]="!selectedData || !selectedData.length"
     />
   </div>
@@ -30,21 +30,4 @@
       }
     </ng-template>
   </p-table>
-
-  <!-- Create dialog -->
-  <p-dialog [header]="createDialogProps.title" [modal]="true" [(visible)]="createDialogProps.visible" [style]="{ width: '25rem' }">
-    @if (createOrUpdateDialogTemplate) {
-      <ng-container *ngTemplateOutlet="createOrUpdateDialogTemplate"></ng-container>
-    }
-    <div class="flex justify-content-end gap-2">
-      <p-button
-        [label]="createDialogProps.cancelBtnText"
-        severity="secondary"
-        size="small"
-        icon="pi pi-times"
-        (onClick)="closeCreateDialog()"
-      />
-      <p-button [label]="createDialogProps.submitBtnText" size="small" icon="pi pi-check" (onClick)="submitCreateDialog()" />
-    </div>
-  </p-dialog>
 </app-card>

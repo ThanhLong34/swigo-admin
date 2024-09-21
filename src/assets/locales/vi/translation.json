@@ -14,5 +14,10 @@
   "success": "Thành công",
   "login_success": "Đăng nhập thành công",
   "there_is_nothing_here": "Không có gì ở đây",
-  "go_to_dashboard": "Đi đến Bảng điều khiển"
+  "go_to_dashboard": "Đi đến Bảng điều khiển",
+  "create_or_update_user_form_username": "Tên đăng nhập",
+  "create_or_update_user_form_email": "Địa chỉ email",
+  "create_or_update_user_form_password": "Mật khẩu",
+  "create_or_update_user_form_nick_name": "Tên hiển thị",
+  "create_or_update_user_dialog_title": "Tạo hoặc Cập nhật Người dùng"
 }
