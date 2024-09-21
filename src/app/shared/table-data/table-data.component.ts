@@ -23,6 +23,10 @@ export class TableDataComponent implements AfterContentInit {
     cancelBtnText: 'Cancel',
     submitBtnText: 'Submit'
   }
+  @Input() tableProps = {
+    createBtnText: 'New',
+    batchDeleteBtnText: 'Batch delete',
+  }
 
   // Outputs
   @Output() createDialogSubmit = new EventEmitter();
@@ -30,7 +34,7 @@ export class TableDataComponent implements AfterContentInit {
   // Templates
   headerTemplate: Nullable<TemplateRef<any>>;
   bodyTemplate: Nullable<TemplateRef<any>>;
-  createDialogTemplate: Nullable<TemplateRef<any>>;
+  createOrUpdateDialogTemplate: Nullable<TemplateRef<any>>;
   @ContentChildren(PrimeTemplate) templates: Nullable<QueryList<PrimeTemplate>>;
 
   //! Constructor
@@ -45,8 +49,8 @@ export class TableDataComponent implements AfterContentInit {
         case 'body':
           this.bodyTemplate = item.template;
           break;
-        case 'createDialog':
-          this.createDialogTemplate = item.template;
+        case 'createOrUpdateDialog':
+          this.createOrUpdateDialogTemplate = item.template;
           break;
       }
     });
