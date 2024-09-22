@@ -13,19 +13,31 @@
       [label]="tableProps.batchDeleteBtnText"
       icon="pi pi-trash"
       size="small"
+      class="mr-2"
       (onClick)="deleteSelectedDataFunc()"
       [disabled]="!selectedData || !selectedData.length"
     />
+    <p-button
+      severity="secondary"
+      [label]="tableProps.reloadBtnText"
+      icon="pi pi-sync"
+      size="small"
+      (onClick)="reloadDataFunc()"
+    />
   </div>
+
+  <p-contextMenu #ctxMenu appendTo="body" [model]="ctxMenuItems" />
 
   <p-table
     #primeTable
-    [value]="data"
     [tableStyle]="{ 'min-width': '50rem' }"
     styleClass="p-datatable-gridlines"
+    [value]="data"
+    [dataKey]="tableProps.dataKey"
     [(selection)]="selectedData"
     [selectionMode]="tableProps.selectionMode"
-    [dataKey]="tableProps.dataKey"
+    [(contextMenuSelection)]="ctxMenuSelectedItem"
+    [contextMenu]="ctxMenu"
   >
     <ng-template pTemplate="header">
       @if (headerTemplate) {

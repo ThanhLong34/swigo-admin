@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SharedModule } from 'src/app/demo/shared/shared.module';
 import { UsersService } from 'src/app/services/users.service';
 import { User } from 'src/app/types/user.type';
@@ -20,6 +20,8 @@ export default class UserManagementComponent implements OnInit {
   seletedUsers: User[] | null = null;
   createOrUpdateDialogVisible = false;
 
+  @ViewChild('tableData', { static: true }) tableData!: TableDataComponent;
+
   constructor(private usersService: UsersService) {}
 
   ngOnInit(): void {
@@ -40,5 +42,9 @@ export default class UserManagementComponent implements OnInit {
 
   reloadData() {
     this.fetchUserList();
+  }
+
+  showContextMenu(event: MouseEvent, user: User) {
+    this.tableData.showContextMenu(event, user);
   }
 }
