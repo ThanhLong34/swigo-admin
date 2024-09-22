@@ -68,7 +68,7 @@ const PrimeNGModules = [
   TableModule,
   ToolbarModule,
   FileUploadModule,
-  DialogModule,
+  DialogModule
 ];
 
 @NgModule({

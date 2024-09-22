@@ -1,6 +1,7 @@
 <app-table-data [data]="users" (createData)="openCreateOrUpdateDialog()">
   <ng-template pTemplate="header">
     <tr>
+      <th style="width: 4rem"><p-tableHeaderCheckbox /></th>
       <th>Username</th>
       <th>Email</th>
       <th>Nick Name</th>
@@ -10,6 +11,9 @@
   </ng-template>
   <ng-template pTemplate="body" let-item>
     <tr>
+      <td>
+        <p-tableCheckbox [value]="item" />
+      </td>
       <td>{{ item.username }}</td>
       <td>{{ item.email }}</td>
       <td>{{ item.nickName }}</td>
@@ -19,7 +23,4 @@
   </ng-template>
 </app-table-data>
 
-<app-create-or-update-user
-  [(visible)]="createOrUpdateDialogVisible"
-  (afterSubmit)="reloadData()"
-></app-create-or-update-user>
+<app-create-or-update-user [(visible)]="createOrUpdateDialogVisible" (afterSubmit)="reloadData()"></app-create-or-update-user>

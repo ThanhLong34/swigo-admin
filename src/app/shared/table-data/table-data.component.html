@@ -18,7 +18,15 @@
     />
   </div>
 
-  <p-table [value]="data" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-gridlines" [(selection)]="selectedData">
+  <p-table
+    #primeTable
+    [value]="data"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    styleClass="p-datatable-gridlines"
+    [(selection)]="selectedData"
+    [selectionMode]="tableProps.selectionMode"
+    [dataKey]="tableProps.dataKey"
+  >
     <ng-template pTemplate="header">
       @if (headerTemplate) {
         <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
