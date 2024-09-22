@@ -16,6 +16,12 @@ import { CreateOrUpdateUserComponent } from '../create-or-update-user/create-or-
   styleUrl: './user-management.component.scss'
 })
 export default class UserManagementComponent implements OnInit {
+  pageInfo = {
+    pageSize: 10,
+    pageNumber: 1,
+    totalItems: 0,
+    totalPages: 0,
+  }
   users: User[] = [];
   seletedUsers: User[] | null = null;
   createOrUpdateDialogVisible = false;
@@ -32,6 +38,7 @@ export default class UserManagementComponent implements OnInit {
     this.usersService.getUserList({ pageSize: 10, pageNumber: 1 }).subscribe((res) => {
       if (res.code === 0) {
         this.users = res.data.list;
+        this.pageInfo = res.data;
       }
     });
   }
@@ -46,5 +53,14 @@ export default class UserManagementComponent implements OnInit {
 
   showContextMenu(event: MouseEvent, user: User) {
     this.tableData.showContextMenu(event, user);
+  }
+
+  changePage(e: { pageNumber: number, pageSize: number }) {
+    this.usersService.getUserList(e).subscribe((res) => {
+      if (res.code === 0) {
+        this.users = res.data.list;
+        this.pageInfo = res.data;
+      }
+    });
   }
 }

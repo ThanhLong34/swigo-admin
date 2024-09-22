@@ -1,4 +1,4 @@
-<app-table-data #tableData [data]="users" (createData)="openCreateOrUpdateDialog()">
+<app-table-data #tableData [data]="users" [pageInfo]="pageInfo" (createData)="openCreateOrUpdateDialog()" (changePage)="changePage($event)">
   <ng-template pTemplate="header">
     <tr>
       <th style="width: 4rem"><p-tableHeaderCheckbox /></th>

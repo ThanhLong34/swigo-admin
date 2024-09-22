@@ -2,7 +2,7 @@
   <div class="mb-3">
     <p-button
       severity="primary"
-      [label]="tableProps.createBtnText"
+      [label]="createButtonText"
       icon="pi pi-plus"
       size="small"
       class="mr-2"
@@ -10,20 +10,14 @@
     />
     <p-button
       severity="danger"
-      [label]="tableProps.batchDeleteBtnText"
+      [label]="batchDeleteButtonText"
       icon="pi pi-trash"
       size="small"
       class="mr-2"
       (onClick)="deleteSelectedDataFunc()"
       [disabled]="!selectedData || !selectedData.length"
     />
-    <p-button
-      severity="secondary"
-      [label]="tableProps.reloadBtnText"
-      icon="pi pi-sync"
-      size="small"
-      (onClick)="reloadDataFunc()"
-    />
+    <p-button severity="secondary" [label]="reloadButtonText" icon="pi pi-sync" size="small" (onClick)="reloadDataFunc()" />
   </div>
 
   <p-contextMenu #ctxMenu appendTo="body" [model]="ctxMenuItems" />
@@ -33,9 +27,9 @@
     [tableStyle]="{ 'min-width': '50rem' }"
     styleClass="p-datatable-gridlines"
     [value]="data"
-    [dataKey]="tableProps.dataKey"
+    [dataKey]="dataKey"
     [(selection)]="selectedData"
-    [selectionMode]="tableProps.selectionMode"
+    [selectionMode]="selectionMode"
     [(contextMenuSelection)]="ctxMenuSelectedItem"
     [contextMenu]="ctxMenu"
   >
@@ -50,4 +44,12 @@
       }
     </ng-template>
   </p-table>
+
+  <p-paginator
+    (onPageChange)="changePageFunc($event)"
+    [first]="paginatorState.first!"
+    [rows]="paginatorState.rows"
+    [totalRecords]="pageInfo.totalItems"
+    [rowsPerPageOptions]="itemPerPageOptions"
+  />
 </app-card>

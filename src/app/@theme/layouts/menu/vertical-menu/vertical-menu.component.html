@@ -28,7 +28,7 @@
     </div>
   </app-card>
   <div class="navbar-content">
-    <ul class="nav coded-inner-navbar" (click)="fireOutClick()" aria-hidden="true">
+    <ul class="nav coded-inner-navbar" (click)="fireOutClick()">
       @for (item of menus; track item) {
         @if (item.type === 'group') {
           <app-menu-group-vertical [item]="item"></app-menu-group-vertical>

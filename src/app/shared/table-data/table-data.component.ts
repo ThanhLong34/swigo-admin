@@ -13,17 +13,18 @@ import {
 } from '@angular/core';
 import { MenuItem, PrimeTemplate } from 'primeng/api';
 import { ContextMenu } from 'primeng/contextmenu';
+import { PaginatorState } from 'primeng/paginator';
 import { Table, TableService } from 'primeng/table';
 import { Nullable } from 'primeng/ts-helpers';
 import { SharedModule } from 'src/app/demo/shared/shared.module';
 
 type SelectionMode = 'single' | 'multiple';
-export interface TableProps {
-  createBtnText: string;
-  batchDeleteBtnText: string;
-  reloadBtnText: string;
-  selectionMode: SelectionMode;
-  dataKey: string;
+
+interface PageInfo {
+  pageSize: number;
+  pageNumber: number;
+  totalItems: number;
+  totalPages: number;
 }
 
 export function tableFactory(comp: TableDataComponent) {
@@ -51,20 +52,34 @@ export class TableDataComponent implements OnInit, AfterContentInit {
   ctxMenuSelectedItem: any | null = null;
   contextMenuActions = ['view', 'edit', 'delete'];
   ctxMenuItems: MenuItem[] = [];
+  paginatorState: PaginatorState = {
+    first: 0,
+    rows: 10,
+  }
 
   // Inputs
   @Input() data: any[] = [];
-  @Input() tableProps: TableProps = {
-    createBtnText: 'New',
-    batchDeleteBtnText: 'Batch delete',
-    reloadBtnText: 'Reload',
-    selectionMode: 'single',
-    dataKey: 'id'
-  };
+  @Input() createButtonText = 'New';
+  @Input() batchDeleteButtonText = 'Batch delete';
+  @Input() reloadButtonText = 'Reload';
+  @Input() selectionMode: SelectionMode = 'single';
+  @Input() dataKey = 'id';
+  @Input() itemPerPageOptions = [10, 20, 50, 100]
+  @Input() pageInfo: PageInfo = {
+    pageSize: 10,
+    pageNumber: 1,
+    totalItems: 0,
+    totalPages: 0,
+  }
 
   // Outputs
   @Output() createData = new EventEmitter();
   @Output() batchDeleteData = new EventEmitter();
+  @Output() reloadData = new EventEmitter();
+  @Output() changePage = new EventEmitter<{
+    pageNumber: number,
+    pageSize: number,
+  }>();
 
   // Templates
   headerTemplate: Nullable<TemplateRef<any>>;
@@ -140,9 +155,18 @@ export class TableDataComponent implements OnInit, AfterContentInit {
   deleteDataFunc(data: any) {
 
   }
-  showContextMenu(event: MouseEvent, data: any) {
+  showContextMenu(e: MouseEvent, data: any) {
     this.ctxMenuSelectedItem = data;
-    this.ctxMenu.show(event);
+    this.ctxMenu.show(e);
   }
 
+  // Pagination functions
+  changePageFunc(e: PaginatorState) {
+    this.paginatorState.first = e.first ?? 0;
+    this.paginatorState.rows = e.rows ?? 0;
+    this.changePage.emit({
+      pageNumber: e.page ? e.page + 1 : 1,
+      pageSize: e.rows ?? 0,
+    })
+  }
 }
