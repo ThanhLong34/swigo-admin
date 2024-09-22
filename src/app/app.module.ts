@@ -20,12 +20,16 @@ import { appReducer } from './app.state';
 import { LanguageEffects } from './stores/language/language.effects';
 import { UserEffects } from './stores/user/user.effects';
 
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+// Interceptors
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -41,9 +45,17 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
       trace: true, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
       connectInZone: true // If set to true, the connection is established within the Angular zone
-    }),
+    })
   ],
-  providers: [MessageService, I18N_PROVIDERS, provideHttpClient()],
+  providers: [
+    MessageService,
+    I18N_PROVIDERS,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

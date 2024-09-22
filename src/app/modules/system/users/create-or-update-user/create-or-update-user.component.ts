@@ -18,7 +18,7 @@ export class CreateOrUpdateUserComponent {
 
   @Input({ required: true }) visible = false;
   @Output() visibleChange = new EventEmitter<Boolean>();
-  @Output() submit = new EventEmitter();
+  @Output() afterSubmit = new EventEmitter();
   @Output() close = new EventEmitter();
 
   constructor(
@@ -40,8 +40,17 @@ export class CreateOrUpdateUserComponent {
   }
 
   submitFunc() {
-    this.visibleChange.emit(false);
-    this.submit.emit(this.formData.value);
+    this.usersService.createUser(this.formData.value).subscribe((res) => {
+      if (res.code === 0) {
+        this.messageService.add({
+          severity: 'success',
+          summary: this.i18NextService.t('success'),
+          detail: this.i18NextService.t('create_user_success')
+        });
+        this.closeFunc();
+        this.afterSubmit.emit(this.formData.value);
+      }
+    });
   }
 
   showToastValidateForm(inputType: string) {

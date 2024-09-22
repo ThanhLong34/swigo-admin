@@ -22,3 +22,10 @@ export interface GetUserList extends Pagination {
   email?: string;
   nickName?: string;
 }
+
+export interface CreateUser {
+  username: string;
+  password: string;
+  email: string;
+  nickName: string;
+}

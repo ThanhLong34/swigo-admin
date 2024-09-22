@@ -19,5 +19,7 @@
   "create_or_update_user_form_email": "Email",
   "create_or_update_user_form_password": "Password",
   "create_or_update_user_form_nick_name": "Nick name",
-  "create_or_update_user_dialog_title": "Create or Update User"
+  "create_or_update_user_dialog_title": "Create or Update User",
+  "create_user_success": "Create user success",
+  "update_user_success": "Update user success"
 }

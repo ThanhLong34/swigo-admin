@@ -38,7 +38,7 @@ export default class UserManagementComponent implements OnInit {
     this.createOrUpdateDialogVisible = true;
   }
 
-  createOrUpdateSubmit(formValue: any) {
-    console.log('🚀 ~ UserManagementComponent ~ createOrUpdateSubmit ~ formValue:', formValue);
+  reloadData() {
+    this.fetchUserList();
   }
 }

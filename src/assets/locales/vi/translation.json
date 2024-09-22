@@ -19,5 +19,7 @@
   "create_or_update_user_form_email": "Địa chỉ email",
   "create_or_update_user_form_password": "Mật khẩu",
   "create_or_update_user_form_nick_name": "Tên hiển thị",
-  "create_or_update_user_dialog_title": "Tạo hoặc Cập nhật Người dùng"
+  "create_or_update_user_dialog_title": "Tạo hoặc Cập nhật Người dùng",
+  "create_user_success": "Tạo người dùng thành công",
+  "update_user_success": "Cập nhật người dùng thành công"
 }
