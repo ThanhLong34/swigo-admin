@@ -33,6 +33,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { FileUploadModule } from 'primeng/fileupload';
 import { DialogModule } from 'primeng/dialog';
 import { ContextMenuModule } from 'primeng/contextmenu';
+import { PasswordModule } from 'primeng/password';
 
 // project
 import { CardComponent } from 'src/app/@theme/components/card/card.component';
@@ -71,6 +72,7 @@ const PrimeNGModules = [
   FileUploadModule,
   DialogModule,
   ContextMenuModule,
+  PasswordModule,
 ];
 
 @NgModule({

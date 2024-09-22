@@ -30,4 +30,18 @@
       margin-right: 0.32rem !important;
     }
   }
+
+  p-password {
+    .p-password {
+      width: 100% !important;
+    }
+
+    input.p-inputtext {
+      width: 100% !important;
+    }
+
+    eyeicon.p-icon-wrapper {
+      transform: translateY(-50%) !important;
+    }
+  }
 }
