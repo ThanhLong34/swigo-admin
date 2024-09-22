@@ -29,6 +29,11 @@ const routes: Routes = [
       {
         path: 'sample-page',
         loadComponent: () => import('./demo/pages/sample-page/sample-page.component')
+      },
+      // Module pages
+      {
+        path: 'users',
+        loadComponent: () => import('./modules/system/users/user-management/user-management.component')
       }
     ]
   },

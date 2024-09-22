@@ -18,6 +18,14 @@ export class AuthGuard implements CanActivateChild {
       return true;
     }
 
+    if (sessionStorage.getItem('userLogin') || localStorage.getItem('userLogin')) {
+      const user = JSON.parse((sessionStorage.getItem('userLogin') as string) || (localStorage.getItem('userLogin') as string)) as User;
+      if (user?.id) {
+        this.authService.userLoggedIn = user;
+        return true;
+      }
+    }
+
     this.router.navigate(['/auth/login']);
     return false;
   }

@@ -229,3 +229,7 @@ ul {
     border-radius: 12px;
   }
 }
+
+.mat-drawer-content {
+  z-index: 2 !important;
+}

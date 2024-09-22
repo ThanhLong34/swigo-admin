@@ -1,0 +1,37 @@
+<p-dialog [header]="'create_or_update_user_dialog_title' | i18next" [modal]="true" [(visible)]="visible" [style]="{ width: '450px' }">
+  <form action="#" [formGroup]="formData" (ngSubmit)="submitFunc()">
+    <div class="flex flex-column gap-2 mb-4">
+      <label for="username">{{ 'create_or_update_user_form_username' | i18next }}:</label>
+      <input pInputText id="username" formControlName="username" (blur)="showToastValidateForm('username')" />
+      @if (usernameIsInvalid) {
+        <small class="text-red-400">{{ 'username_invalid' | i18nextNamespace: 'validation' }}</small>
+      }
+    </div>
+    <div class="flex flex-column gap-2 mb-4">
+      <label for="password">{{ 'create_or_update_user_form_password' | i18next }}:</label>
+      <input pInputText id="password" formControlName="password" (blur)="showToastValidateForm('password')" />
+      <small>{{ 'password_min_length' | i18nextNamespace: 'validation' }}</small>
+      @if (passwordIsInvalid) {
+        <small class="text-red-400">{{ 'password_invalid' | i18nextNamespace: 'validation' }}</small>
+      }
+    </div>
+    <div class="flex flex-column gap-2 mb-4">
+      <label for="email">{{ 'create_or_update_user_form_email' | i18next }}:</label>
+      <input pInputText id="email" formControlName="email" (blur)="showToastValidateForm('email')" />
+      @if (emailIsInvalid) {
+        <small class="text-red-400">{{ 'email_invalid' | i18nextNamespace: 'validation' }}</small>
+      }
+    </div>
+    <div class="flex flex-column gap-2 mb-4">
+      <label for="nickName">{{ 'create_or_update_user_form_nick_name' | i18next }}:</label>
+      <input pInputText id="nickName" formControlName="nickName" (blur)="showToastValidateForm('nickName')" />
+      @if (nickNameIsInvalid) {
+        <small class="text-red-400">{{ 'nick_name_invalid' | i18nextNamespace: 'validation' }}</small>
+      }
+    </div>
+    <div class="flex justify-content-end gap-2">
+      <p-button label="Cancel" severity="secondary" size="small" icon="pi pi-times" (onClick)="closeFunc()" />
+      <p-button label="Submit" size="small" icon="pi pi-check" (onClick)="submitFunc()" [disabled]="formData.invalid" />
+    </div>
+  </form>
+</p-dialog>

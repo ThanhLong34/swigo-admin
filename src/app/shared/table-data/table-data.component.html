@@ -1,0 +1,33 @@
+<app-card [showHeader]="false">
+  <div class="mb-3">
+    <p-button
+      severity="primary"
+      [label]="tableProps.createBtnText"
+      icon="pi pi-plus"
+      size="small"
+      class="mr-2"
+      (onClick)="createDataFunc()"
+    />
+    <p-button
+      severity="danger"
+      [label]="tableProps.batchDeleteBtnText"
+      icon="pi pi-trash"
+      size="small"
+      (onClick)="deleteSelectedDataFunc()"
+      [disabled]="!selectedData || !selectedData.length"
+    />
+  </div>
+
+  <p-table [value]="data" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-gridlines" [(selection)]="selectedData">
+    <ng-template pTemplate="header">
+      @if (headerTemplate) {
+        <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+      }
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      @if (bodyTemplate) {
+        <ng-container *ngTemplateOutlet="bodyTemplate; context: { $implicit: item }"></ng-container>
+      }
+    </ng-template>
+  </p-table>
+</app-card>

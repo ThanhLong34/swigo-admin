@@ -30,7 +30,16 @@ export class AuthService {
     return this.http.get(`${this.apiUrl}/whoami`);
   }
 
+  refreshSession(uuid: string) {
+    return this.http.post(`${this.apiUrl}/refreshSession`, { uuid });
+  }
+
   login(user: UserLogin) {
     return this.http.post<HttpResponse<User>>(`${this.apiUrl}/signin`, user);
+  }
+
+  logout() {
+    this.userLoggedIn = null;
+    return this.http.post(`${this.apiUrl}/signout`, {});
   }
 }

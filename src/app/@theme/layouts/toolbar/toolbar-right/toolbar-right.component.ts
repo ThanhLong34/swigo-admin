@@ -1,7 +1,8 @@
 // angular import
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { AuthService } from 'src/app/services/auth.service';
 import { logout } from 'src/app/stores/user/user.actions';
@@ -11,7 +12,7 @@ import { logout } from 'src/app/stores/user/user.actions';
   templateUrl: './toolbar-right.component.html',
   styleUrls: ['./toolbar-right.component.scss']
 })
-export class NavRightComponent {
+export class NavRightComponent implements OnDestroy {
   // public props
   mainCards = [
     {
@@ -62,7 +63,6 @@ export class NavRightComponent {
       ]
     }
   ];
-
   notification = [
     {
       sub_title: 'Improvement',
@@ -77,11 +77,16 @@ export class NavRightComponent {
       img: 'assets/images/layout/img-announcement-4.png'
     }
   ];
+  logoutSubscription!: Subscription;
 
   constructor(private router: Router, private store: Store<AppState>, private authService: AuthService) {}
 
+  ngOnDestroy(): void {
+    this.logoutSubscription?.unsubscribe();
+  }
+
   handleSignOut() {
-    this.authService.userLoggedIn = null;
+    this.logoutSubscription = this.authService.logout().subscribe();
     this.store.dispatch(logout());
     this.router.navigate(['/auth/login'], {
       replaceUrl: true

@@ -13,7 +13,7 @@ export const menus: Navigation[] = [
         type: 'item',
         classes: 'nav-item',
         url: '/dashboard',
-        icon: '#custom-status-up'
+        icon: 'pi-home'
       }
     ]
   },
@@ -24,12 +24,12 @@ export const menus: Navigation[] = [
     icon: 'icon-navigation',
     children: [
       {
-        id: 'Dashboard',
-        title: 'Dashboard',
+        id: 'Users',
+        title: 'Users',
         type: 'item',
         classes: 'nav-item',
-        url: '/dashboard',
-        icon: '#custom-status-up'
+        url: '/users',
+        icon: 'pi-user'
       }
     ]
   },
@@ -38,80 +38,35 @@ export const menus: Navigation[] = [
     title: 'Customer',
     type: 'group',
     icon: 'icon-navigation',
-    children: [
-      {
-        id: 'Dashboard',
-        title: 'Dashboard',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/dashboard',
-        icon: '#custom-status-up'
-      }
-    ]
+    children: []
   },
   {
     id: 'order',
     title: 'Order',
     type: 'group',
     icon: 'icon-navigation',
-    children: [
-      {
-        id: 'Dashboard',
-        title: 'Dashboard',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/dashboard',
-        icon: '#custom-status-up'
-      }
-    ]
+    children: []
   },
   {
     id: 'production',
     title: 'Production',
     type: 'group',
     icon: 'icon-navigation',
-    children: [
-      {
-        id: 'Dashboard',
-        title: 'Dashboard',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/dashboard',
-        icon: '#custom-status-up'
-      }
-    ]
+    children: []
   },
   {
     id: 'news',
     title: 'News',
     type: 'group',
     icon: 'icon-navigation',
-    children: [
-      {
-        id: 'Dashboard',
-        title: 'Dashboard',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/dashboard',
-        icon: '#custom-status-up'
-      }
-    ]
+    children: []
   },
   {
     id: 'hr',
     title: 'Human Resource',
     type: 'group',
     icon: 'icon-navigation',
-    children: [
-      {
-        id: 'Dashboard',
-        title: 'Dashboard',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/dashboard',
-        icon: '#custom-status-up'
-      }
-    ]
+    children: []
   },
   {
     id: 'ui-example',
@@ -125,7 +80,7 @@ export const menus: Navigation[] = [
         type: 'item',
         classes: 'nav-item',
         url: '/auth/login',
-        icon: '#custom-shield',
+        icon: 'pi-sign-in',
         target: true,
         breadcrumbs: false
       },
@@ -135,7 +90,7 @@ export const menus: Navigation[] = [
         type: 'item',
         classes: 'nav-item',
         url: '/auth/register',
-        icon: '#custom-password-check',
+        icon: 'pi-sign-out',
         target: true,
         breadcrumbs: false
       },
@@ -145,7 +100,7 @@ export const menus: Navigation[] = [
         type: 'item',
         classes: 'nav-item',
         url: '/component/typography',
-        icon: '#custom-text-block'
+        icon: 'pi-language'
       },
       {
         id: 'color',
@@ -153,7 +108,7 @@ export const menus: Navigation[] = [
         type: 'item',
         classes: 'nav-item',
         url: '/component/color',
-        icon: '#custom-clipboard'
+        icon: 'pi-palette'
       },
       {
         id: 'table',
@@ -161,7 +116,7 @@ export const menus: Navigation[] = [
         type: 'item',
         classes: 'nav-item',
         url: 'https://tabler-icons.io/',
-        icon: '#custom-mouse-circle',
+        icon: 'pi-table',
         target: true,
         external: true
       },
@@ -169,7 +124,7 @@ export const menus: Navigation[] = [
         id: 'menu-levels',
         title: 'Menu levels',
         type: 'collapse',
-        icon: '#custom-level',
+        icon: 'pi-ellipsis-v',
         children: [
           {
             id: 'level-2-1',
@@ -265,7 +220,7 @@ export const menus: Navigation[] = [
         type: 'item',
         classes: 'nav-item',
         url: '/sample-page',
-        icon: '#custom-notification-status'
+        icon: 'pi-circle-off'
       }
     ]
   },

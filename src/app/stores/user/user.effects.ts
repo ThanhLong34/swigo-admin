@@ -13,6 +13,7 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(login),
       tap(({ user, remember }) => {
+        sessionStorage.setItem('userLogin', JSON.stringify(user));
         if (remember) {
           localStorage.setItem('userLogin', JSON.stringify(user));
         }
@@ -25,6 +26,7 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(logout),
       tap(() => {
+        sessionStorage.removeItem('userLogin');
         localStorage.removeItem('userLogin');
       }),
       map(() => ({ type: 'noop' })), // Prevent infinite

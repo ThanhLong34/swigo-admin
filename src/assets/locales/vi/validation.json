@@ -3,5 +3,6 @@
   "email_invalid": "Email không hợp lệ.",
   "username_invalid": "Tên đăng nhập không hợp lệ.",
   "password_invalid": "Mật khẩu không hợp lệ.",
-  "password_min_length": "Mật khẩu phải chứa ít nhất 6 ký tự."
+  "password_min_length": "Mật khẩu phải chứa ít nhất 6 ký tự.",
+  "nick_name_invalid": "Tên hiển thị không hợp lệ."
 }

@@ -1,0 +1,25 @@
+<app-table-data [data]="users" (createData)="openCreateOrUpdateDialog()">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Nick Name</th>
+      <th>UUID</th>
+      <th>Created At</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-item>
+    <tr>
+      <td>{{ item.username }}</td>
+      <td>{{ item.email }}</td>
+      <td>{{ item.nickName }}</td>
+      <td>{{ item.uuid }}</td>
+      <td>{{ item.createdAt | date: 'short' }}</td>
+    </tr>
+  </ng-template>
+</app-table-data>
+
+<app-create-or-update-user
+  [(visible)]="createOrUpdateDialogVisible"
+  (afterSubmit)="reloadData()"
+></app-create-or-update-user>
