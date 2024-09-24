@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { SharedModule } from 'src/app/demo/shared/shared.module';
 import { UsersService } from 'src/app/services/users.service';
 import { User } from 'src/app/types/user.type';
@@ -7,6 +7,8 @@ import { DatePipe } from '@angular/common';
 import { I18NextModule } from 'angular-i18next';
 import { I18NextNamespacePipe } from 'src/app/pipes/i18next-namespace.pipe';
 import { CreateOrUpdateUserComponent } from '../create-or-update-user/create-or-update-user.component';
+import { Observable, Subject, takeUntil } from 'rxjs';
+import { mapHttpPaginationResponse } from 'src/app/utils/http.util';
 
 @Component({
   selector: 'app-user-management',
@@ -15,7 +17,8 @@ import { CreateOrUpdateUserComponent } from '../create-or-update-user/create-or-
   templateUrl: './user-management.component.html',
   styleUrl: './user-management.component.scss'
 })
-export default class UserManagementComponent implements OnInit {
+export default class UserManagementComponent implements OnInit, OnDestroy {
+  private unsubscribe$ = new Subject<void>();
   pageInfo = {
     pageSize: 10,
     pageNumber: 1,
@@ -34,12 +37,17 @@ export default class UserManagementComponent implements OnInit {
     this.fetchUserList();
   }
 
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
   fetchUserList() {
-    this.usersService.getUserList({ pageSize: 10, pageNumber: 1 }).subscribe((res) => {
+    console.log(this.pageInfo)
+    this.usersService.getUserList(this.pageInfo).pipe(takeUntil(this.unsubscribe$)).subscribe((res) => {
       if (res.code === 0) {
-        this.users = res.data.list;
-        console.log("🚀 ~ UserManagementComponent ~ this.usersService.getUserList ~ this.users:", this.users)
-        this.pageInfo = res.data;
+        this.users = res.data.list ?? [];
+        this.pageInfo = mapHttpPaginationResponse(res);
       }
     });
   }
@@ -57,11 +65,8 @@ export default class UserManagementComponent implements OnInit {
   }
 
   changePage(e: { pageNumber: number, pageSize: number }) {
-    this.usersService.getUserList(e).subscribe((res) => {
-      if (res.code === 0) {
-        this.users = res.data.list;
-        this.pageInfo = res.data;
-      }
-    });
+    this.pageInfo.pageNumber = e.pageNumber;
+    this.pageInfo.pageSize = e.pageSize
+    this.fetchUserList();
   }
 }

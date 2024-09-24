@@ -142,7 +142,7 @@ export class TableDataComponent implements OnInit, AfterContentInit {
     this.batchDeleteData.emit();
   }
   reloadDataFunc() {
-
+    this.reloadData.emit();
   }
 
   // Context menu functions
