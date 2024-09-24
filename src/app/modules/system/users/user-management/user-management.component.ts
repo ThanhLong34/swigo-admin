@@ -38,6 +38,7 @@ export default class UserManagementComponent implements OnInit {
     this.usersService.getUserList({ pageSize: 10, pageNumber: 1 }).subscribe((res) => {
       if (res.code === 0) {
         this.users = res.data.list;
+        console.log("🚀 ~ UserManagementComponent ~ this.usersService.getUserList ~ this.users:", this.users)
         this.pageInfo = res.data;
       }
     });

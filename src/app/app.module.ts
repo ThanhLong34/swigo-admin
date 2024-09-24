@@ -1,6 +1,8 @@
 // angular import
-import { isDevMode, NgModule } from '@angular/core';
+import { isDevMode, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { registerLocaleData } from '@angular/common';
+import localeVi from '@angular/common/locales/vi';
 
 // project import
 import { AppRoutingModule } from './app-routing.module';
@@ -25,7 +27,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 // Interceptors
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { TableDataComponent } from './shared/table-data/table-data.component';
+
+registerLocaleData(localeVi);
 
 @NgModule({
   declarations: [AppComponent],
@@ -46,7 +49,7 @@ import { TableDataComponent } from './shared/table-data/table-data.component';
       trace: true, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
       connectInZone: true // If set to true, the connection is established within the Angular zone
-    }),
+    })
   ],
   providers: [
     MessageService,
@@ -54,8 +57,9 @@ import { TableDataComponent } from './shared/table-data/table-data.component';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true,
+      multi: true
     },
+    { provide: LOCALE_ID, useValue: 'vi' }
   ],
   bootstrap: [AppComponent]
 })
