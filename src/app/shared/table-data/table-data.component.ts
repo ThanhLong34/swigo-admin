@@ -11,7 +11,7 @@ import {
   TemplateRef,
   ViewChild
 } from '@angular/core';
-import { MenuItem, PrimeTemplate } from 'primeng/api';
+import { MenuItem, PrimeTemplate, SortEvent } from 'primeng/api';
 import { ContextMenu } from 'primeng/contextmenu';
 import { PaginatorState } from 'primeng/paginator';
 import { Table, TableService } from 'primeng/table';
@@ -25,7 +25,16 @@ interface PageInfo {
   pageNumber: number;
   totalItems: number;
   totalPages: number;
+  sort: string | null | undefined;
 }
+
+const pageInfoInitial: PageInfo = {
+  pageSize: 10,
+  pageNumber: 1,
+  totalItems: 0,
+  totalPages: 0,
+  sort: undefined
+};
 
 export function tableFactory(comp: TableDataComponent) {
   return comp.primeTable;
@@ -54,8 +63,9 @@ export class TableDataComponent implements OnInit, AfterContentInit {
   ctxMenuItems: MenuItem[] = [];
   paginatorState: PaginatorState = {
     first: 0,
-    rows: 10,
-  }
+    rows: 10
+  };
+  isSorted: boolean | null = null;
 
   // Inputs
   @Input() data: any[] = [];
@@ -64,22 +74,19 @@ export class TableDataComponent implements OnInit, AfterContentInit {
   @Input() reloadButtonText = 'Reload';
   @Input() selectionMode: SelectionMode = 'single';
   @Input() dataKey = 'id';
-  @Input() itemPerPageOptions = [10, 20, 50, 100]
-  @Input() pageInfo: PageInfo = {
-    pageSize: 10,
-    pageNumber: 1,
-    totalItems: 0,
-    totalPages: 0,
-  }
+  @Input() itemPerPageOptions = [10, 20, 50, 100];
+  @Input() pageInfo: PageInfo = { ...pageInfoInitial };
 
   // Outputs
   @Output() createData = new EventEmitter();
   @Output() batchDeleteData = new EventEmitter();
   @Output() reloadData = new EventEmitter();
   @Output() changePage = new EventEmitter<{
-    pageNumber: number,
-    pageSize: number,
+    pageNumber: number;
+    pageSize: number;
   }>();
+  @Output() sort = new EventEmitter<string>();
+  @Output() pageInfoChange = new EventEmitter<PageInfo>();
 
   // Templates
   headerTemplate: Nullable<TemplateRef<any>>;
@@ -118,7 +125,7 @@ export class TableDataComponent implements OnInit, AfterContentInit {
           });
           break;
       }
-    })
+    });
   }
 
   ngAfterContentInit() {
@@ -142,19 +149,18 @@ export class TableDataComponent implements OnInit, AfterContentInit {
     this.batchDeleteData.emit();
   }
   reloadDataFunc() {
+    this.primeTable.reset();
+    this.pageInfo = { ...pageInfoInitial };
+    this.pageInfoChange.emit(this.pageInfo);
+    this.paginatorState.first = 0;
+    this.paginatorState.rows = 10;
     this.reloadData.emit();
   }
 
   // Context menu functions
-  viewDataFunc(data: any) {
-
-  }
-  editDataFunc(data: any) {
-
-  }
-  deleteDataFunc(data: any) {
-
-  }
+  viewDataFunc(data: any) {}
+  editDataFunc(data: any) {}
+  deleteDataFunc(data: any) {}
   showContextMenu(e: MouseEvent, data: any) {
     this.ctxMenuSelectedItem = data;
     this.ctxMenu.show(e);
@@ -166,7 +172,26 @@ export class TableDataComponent implements OnInit, AfterContentInit {
     this.paginatorState.rows = e.rows ?? 0;
     this.changePage.emit({
       pageNumber: e.page ? e.page + 1 : 1,
-      pageSize: e.rows ?? 0,
-    })
+      pageSize: e.rows ?? 0
+    });
+  }
+
+  // Table functions
+  sortData(e: SortEvent) {
+    const sortFields = e.multiSortMeta?.map((sortMeta) => ({
+      field: sortMeta.field,
+      order: sortMeta.order === 1 ? 'asc' : 'desc'
+    }));
+    const sortQuery = sortFields?.map((sortField) => `${sortField.field}:${sortField.order}`).join(',');
+    this.sort.emit(sortQuery ?? '');
+  }
+  customSort(e: SortEvent) {
+    if (!this.isSorted) {
+      this.isSorted = true;
+      this.sortData(e);
+    } else {
+      this.isSorted = false;
+      this.sortData(e);
+    }
   }
 }

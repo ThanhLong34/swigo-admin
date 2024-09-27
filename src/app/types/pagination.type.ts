@@ -10,4 +10,10 @@ export interface PaginationResponse<T> {
   pageSize: number;
   totalItems: number;
   totalPages: number;
+  sort: string | null | undefined;
+}
+
+export interface ChangePageEvent {
+  pageNumber: number;
+  pageSize: number;
 }

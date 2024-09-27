@@ -7,8 +7,9 @@ import { DatePipe } from '@angular/common';
 import { I18NextModule } from 'angular-i18next';
 import { I18NextNamespacePipe } from 'src/app/pipes/i18next-namespace.pipe';
 import { CreateOrUpdateUserComponent } from '../create-or-update-user/create-or-update-user.component';
-import { Observable, Subject, takeUntil } from 'rxjs';
-import { mapHttpPaginationResponse } from 'src/app/utils/http.util';
+import { Subject, takeUntil } from 'rxjs';
+import { ChangePageEvent, PaginationResponse } from 'src/app/types/pagination.type';
+import { mapPageInfoResponse, mapResultListResponse } from 'src/app/utils/http.util';
 
 @Component({
   selector: 'app-user-management',
@@ -19,11 +20,12 @@ import { mapHttpPaginationResponse } from 'src/app/utils/http.util';
 })
 export default class UserManagementComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
-  pageInfo = {
+  pageInfo: PaginationResponse<User> = {
     pageSize: 10,
     pageNumber: 1,
     totalItems: 0,
     totalPages: 0,
+    sort: undefined
   }
   users: User[] = [];
   seletedUsers: User[] | null = null;
@@ -43,11 +45,10 @@ export default class UserManagementComponent implements OnInit, OnDestroy {
   }
 
   fetchUserList() {
-    console.log(this.pageInfo)
     this.usersService.getUserList(this.pageInfo).pipe(takeUntil(this.unsubscribe$)).subscribe((res) => {
       if (res.code === 0) {
-        this.users = res.data.list ?? [];
-        this.pageInfo = mapHttpPaginationResponse(res);
+        mapResultListResponse(this.users, res);
+        mapPageInfoResponse(this.pageInfo, res);
       }
     });
   }
@@ -64,9 +65,14 @@ export default class UserManagementComponent implements OnInit, OnDestroy {
     this.tableData.showContextMenu(event, user);
   }
 
-  changePage(e: { pageNumber: number, pageSize: number }) {
+  changePage(e: ChangePageEvent) {
     this.pageInfo.pageNumber = e.pageNumber;
     this.pageInfo.pageSize = e.pageSize
+    this.fetchUserList();
+  }
+
+  sortData(sortQuery: string) {
+    this.pageInfo.sort = sortQuery;
     this.fetchUserList();
   }
 }

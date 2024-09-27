@@ -1,13 +1,19 @@
-<app-table-data #tableData [data]="users" [pageInfo]="pageInfo" (createData)="openCreateOrUpdateDialog()" (changePage)="changePage($event)" (reloadData)="reloadData()">
+<app-table-data #tableData [data]="users" [(pageInfo)]="pageInfo" (createData)="openCreateOrUpdateDialog()" (changePage)="changePage($event)" (reloadData)="reloadData()" (sort)="sortData($event)">
   <ng-template pTemplate="header">
     <tr>
       <th style="width: 4rem"><p-tableHeaderCheckbox /></th>
-      <th>Username</th>
-      <th>Email</th>
-      <th>Nick Name</th>
-      <th>UUID</th>
-      <th>Created At</th>
-      <th style="width: 5rem"></th>
+      <th pSortableColumn="username" style="width: 200px">
+        Username
+        <p-sortIcon field="username" />
+      </th>
+      <th pSortableColumn="email" style="width: 200px">
+        Email
+        <p-sortIcon field="email" />
+      </th>
+      <th style="width: 200px">Nick Name</th>
+      <th style="width: 200px">UUID</th>
+      <th style="width: 200px">Created At</th>
+      <th style="width: 100px"></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-user>

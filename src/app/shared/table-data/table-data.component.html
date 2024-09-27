@@ -25,6 +25,11 @@
     [selectionMode]="selectionMode"
     [(contextMenuSelection)]="ctxMenuSelectedItem"
     [contextMenu]="ctxMenu"
+    [resizableColumns]="true"
+    columnResizeMode="expand"
+    sortMode="multiple"
+    [customSort]="true"
+    (sortFunction)="customSort($event)"
   >
     <ng-template pTemplate="header">
       @if (headerTemplate) {
