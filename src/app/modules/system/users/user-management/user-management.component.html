@@ -1,4 +1,12 @@
-<app-table-data #tableData [data]="users" [(pageInfo)]="pageInfo" (createData)="openCreateOrUpdateDialog()" (changePage)="changePage($event)" (reloadData)="reloadData()" (sort)="sortData($event)">
+<app-table-data
+  #tableData
+  [data]="users"
+  [(pageInfo)]="pageInfo"
+  (createData)="openCreateOrUpdateDialog()"
+  (changePage)="changePage($event)"
+  (reloadData)="reloadData()"
+  (sort)="sortData($event)"
+>
   <ng-template pTemplate="header">
     <tr>
       <th style="width: 4rem"><p-tableHeaderCheckbox /></th>
@@ -39,4 +47,4 @@
   </ng-template>
 </app-table-data>
 
-<app-create-or-update-user [(visible)]="createOrUpdateDialogVisible" (afterSubmit)="reloadData()"></app-create-or-update-user>
+<app-create-or-update-user #createOrUpdateUserDialog (afterSubmit)="reloadData()"></app-create-or-update-user>

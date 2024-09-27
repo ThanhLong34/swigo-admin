@@ -29,9 +29,9 @@ export default class UserManagementComponent implements OnInit, OnDestroy {
   }
   users: User[] = [];
   seletedUsers: User[] | null = null;
-  createOrUpdateDialogVisible = false;
 
   @ViewChild('tableData', { static: true }) tableData!: TableDataComponent;
+  @ViewChild('createOrUpdateUserDialog', { static: true }) createOrUpdateUserDialog!: CreateOrUpdateUserComponent;
 
   constructor(private usersService: UsersService) {}
 
@@ -54,7 +54,7 @@ export default class UserManagementComponent implements OnInit, OnDestroy {
   }
 
   openCreateOrUpdateDialog() {
-    this.createOrUpdateDialogVisible = true;
+    this.createOrUpdateUserDialog.open();
   }
 
   reloadData() {
