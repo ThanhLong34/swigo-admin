@@ -45,4 +45,16 @@
       transform: translateY(-50%) !important;
     }
   }
+
+  .p-confirm-popup {
+    transform: translateY(18px) !important;
+
+    .p-confirm-popup-content {
+      padding-top: 1.125rem !important;
+
+      .p-confirm-popup-icon {
+        margin-right: 0.55rem !important;
+      }
+    }
+  }
 }

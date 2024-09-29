@@ -9,7 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './demo/shared/shared.module';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 import { I18NextModule } from 'angular-i18next';
 import { I18N_PROVIDERS } from './providers/i18next.provider';
@@ -53,6 +53,7 @@ registerLocaleData(localeVi);
   ],
   providers: [
     MessageService,
+    ConfirmationService,
     I18N_PROVIDERS,
     {
       provide: HTTP_INTERCEPTORS,

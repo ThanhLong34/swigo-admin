@@ -10,6 +10,7 @@ import { CreateOrUpdateUserComponent } from '../create-or-update-user/create-or-
 import { Subject, takeUntil } from 'rxjs';
 import { ChangePageEvent, PaginationResponse } from 'src/app/types/pagination.type';
 import { mapPageInfoResponse, mapResultListResponse } from 'src/app/utils/http.util';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-user-management',
@@ -26,14 +27,17 @@ export default class UserManagementComponent implements OnInit, OnDestroy {
     totalItems: 0,
     totalPages: 0,
     sort: undefined
-  }
+  };
   users: User[] = [];
   seletedUsers: User[] | null = null;
 
   @ViewChild('tableData', { static: true }) tableData!: TableDataComponent;
   @ViewChild('createOrUpdateUserDialog', { static: true }) createOrUpdateUserDialog!: CreateOrUpdateUserComponent;
 
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private confirmationService: ConfirmationService
+  ) {}
 
   ngOnInit(): void {
     this.fetchUserList();
@@ -45,12 +49,15 @@ export default class UserManagementComponent implements OnInit, OnDestroy {
   }
 
   fetchUserList() {
-    this.usersService.getUserList(this.pageInfo).pipe(takeUntil(this.unsubscribe$)).subscribe((res) => {
-      if (res.code === 0) {
-        mapResultListResponse(this.users, res);
-        mapPageInfoResponse(this.pageInfo, res);
-      }
-    });
+    this.usersService
+      .getUserList(this.pageInfo)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((res) => {
+        if (res.code === 0) {
+          mapResultListResponse(this.users, res);
+          mapPageInfoResponse(this.pageInfo, res);
+        }
+      });
   }
 
   openCreateOrUpdateDialog() {
@@ -67,12 +74,29 @@ export default class UserManagementComponent implements OnInit, OnDestroy {
 
   changePage(e: ChangePageEvent) {
     this.pageInfo.pageNumber = e.pageNumber;
-    this.pageInfo.pageSize = e.pageSize
+    this.pageInfo.pageSize = e.pageSize;
     this.fetchUserList();
   }
 
   sortData(sortQuery: string) {
     this.pageInfo.sort = sortQuery;
     this.fetchUserList();
+  }
+
+  batchDeleteData(data: { event: MouseEvent; selectedData: User[] }) {
+    console.log('🚀 ~ UserManagementComponent ~ batchDeleteData ~ e:', data.event);
+    this.confirmationService.confirm({
+      target: data.event.target as EventTarget,
+      message: 'Are you sure you want to delete the selected users?',
+      icon: 'pi pi-exclamation-triangle',
+      acceptIcon: 'pi pi-check mr-1',
+      rejectIcon: 'pi pi-times mr-1',
+      acceptLabel: 'Confirm',
+      rejectLabel: 'Cancel',
+      acceptButtonStyleClass: 'p-button-danger ml-2',
+      accept: () => {
+        console.log('Delete users:', data.selectedData);
+      }
+    });
   }
 }

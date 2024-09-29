@@ -57,7 +57,7 @@ export function tableFactory(comp: TableDataComponent) {
 })
 export class TableDataComponent implements OnInit, AfterContentInit {
   // Properties
-  selectedData: any[] | null = null;
+  selectedData: any[] = [];
   ctxMenuSelectedItem: any | null = null;
   contextMenuActions = ['view', 'edit', 'delete'];
   ctxMenuItems: MenuItem[] = [];
@@ -79,7 +79,10 @@ export class TableDataComponent implements OnInit, AfterContentInit {
 
   // Outputs
   @Output() createData = new EventEmitter();
-  @Output() batchDeleteData = new EventEmitter();
+  @Output() batchDeleteData = new EventEmitter<{
+    event: MouseEvent;
+    selectedData: any[];
+  }>();
   @Output() reloadData = new EventEmitter();
   @Output() changePage = new EventEmitter<{
     pageNumber: number;
@@ -145,8 +148,11 @@ export class TableDataComponent implements OnInit, AfterContentInit {
   createDataFunc() {
     this.createData.emit();
   }
-  deleteSelectedDataFunc() {
-    this.batchDeleteData.emit();
+  deleteSelectedDataFunc(e: MouseEvent) {
+    this.batchDeleteData.emit({
+      event: e,
+      selectedData: this.selectedData
+    });
   }
   reloadDataFunc() {
     this.primeTable.reset();

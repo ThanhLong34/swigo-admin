@@ -7,7 +7,7 @@
       icon="pi pi-trash"
       size="small"
       class="mr-2"
-      (onClick)="deleteSelectedDataFunc()"
+      (onClick)="deleteSelectedDataFunc($event)"
       [disabled]="!selectedData || !selectedData.length"
     />
     <p-button severity="secondary" [label]="reloadButtonText" icon="pi pi-sync" size="small" (onClick)="reloadDataFunc()" />

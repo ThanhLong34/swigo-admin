@@ -35,6 +35,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { PasswordModule } from 'primeng/password';
 import { PaginatorModule } from 'primeng/paginator';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 // project
 import { CardComponent } from 'src/app/@theme/components/card/card.component';
@@ -75,6 +76,7 @@ const PrimeNGModules = [
   ContextMenuModule,
   PasswordModule,
   PaginatorModule,
+  ConfirmPopupModule,
 ];
 
 @NgModule({
