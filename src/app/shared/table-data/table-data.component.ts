@@ -200,4 +200,7 @@ export class TableDataComponent implements OnInit, AfterContentInit {
       this.sortData(e);
     }
   }
+  clearSelectedData() {
+    this.selectedData = [];
+  }
 }

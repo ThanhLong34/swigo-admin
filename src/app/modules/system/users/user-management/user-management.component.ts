@@ -10,7 +10,7 @@ import { CreateOrUpdateUserComponent } from '../create-or-update-user/create-or-
 import { Subject, takeUntil } from 'rxjs';
 import { ChangePageEvent, PaginationResponse } from 'src/app/types/pagination.type';
 import { mapPageInfoResponse, mapResultListResponse } from 'src/app/utils/http.util';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-user-management',
@@ -36,7 +36,8 @@ export default class UserManagementComponent implements OnInit, OnDestroy {
 
   constructor(
     private usersService: UsersService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -84,7 +85,6 @@ export default class UserManagementComponent implements OnInit, OnDestroy {
   }
 
   batchDeleteData(data: { event: MouseEvent; selectedData: User[] }) {
-    console.log('🚀 ~ UserManagementComponent ~ batchDeleteData ~ e:', data.event);
     this.confirmationService.confirm({
       target: data.event.target as EventTarget,
       message: 'Are you sure you want to delete the selected users?',
@@ -95,7 +95,22 @@ export default class UserManagementComponent implements OnInit, OnDestroy {
       rejectLabel: 'Cancel',
       acceptButtonStyleClass: 'p-button-danger ml-2',
       accept: () => {
-        console.log('Delete users:', data.selectedData);
+        const ids = data.selectedData.map((user) => user.id);
+        this.usersService.deleteByIds(ids).subscribe((res) => {
+          if (res.code === 0) {
+            this.fetchUserList();
+            this.tableData.clearSelectedData();
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Batch delete success'
+            });
+          } else {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Batch delete failed'
+            });
+          }
+        });
       }
     });
   }
