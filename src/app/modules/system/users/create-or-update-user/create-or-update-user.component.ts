@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import { SharedModule } from 'src/app/demo/shared/shared.module';
 import { I18NextNamespacePipe } from 'src/app/pipes/i18next-namespace.pipe';
 import { UsersService } from 'src/app/services/users.service';
+import { User } from 'src/app/types/user.type';
 
 @Component({
   selector: 'app-create-or-update-user',
@@ -16,6 +17,7 @@ import { UsersService } from 'src/app/services/users.service';
 export class CreateOrUpdateUserComponent {
   formData!: FormGroup;
   visible = false;
+  dialogType: 'create' | 'update' = 'create';
 
   @Output() afterSubmit = new EventEmitter();
   @Output() afterOpen = new EventEmitter();
@@ -34,8 +36,27 @@ export class CreateOrUpdateUserComponent {
     });
   }
 
-  open() {
+  private _rebuildFormControlsForCreate() {
+    if (!this.formData.controls['password']) {
+      this.formData.addControl('password', new FormControl('', [Validators.required, Validators.minLength(6)]));
+    }
+  }
+
+  private _rebuildFormControlsForUpdate() {
+    this.formData.removeControl('password');
+  }
+
+  open(data: User | null = null) {
     this.visible = true;
+    if (data) {
+      this.dialogType = 'update';
+      this._rebuildFormControlsForUpdate();
+      this.formData.patchValue(data);
+    } else {
+      this.dialogType = 'create';
+      this._rebuildFormControlsForCreate();
+      this.formData.reset();
+    }
     this.afterOpen.emit();
   }
 
@@ -91,7 +112,10 @@ export class CreateOrUpdateUserComponent {
 
   get passwordIsInvalid() {
     const passwordCtrl = this.formData.controls['password'];
-    return passwordCtrl.touched && passwordCtrl.dirty && passwordCtrl.invalid;
+    if (passwordCtrl) {
+      return passwordCtrl.touched && passwordCtrl.dirty && passwordCtrl.invalid;
+    }
+    return false;
   }
 
   get emailIsInvalid() {

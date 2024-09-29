@@ -60,8 +60,12 @@ export default class UserManagementComponent implements OnInit, OnDestroy {
       });
   }
 
-  openCreateOrUpdateDialog() {
-    this.createOrUpdateUserDialog.open();
+  openCreateOrUpdateDialog(user: User | null = null) {
+    if (user) {
+      this.createOrUpdateUserDialog.open(user);
+    } else {
+      this.createOrUpdateUserDialog.open();
+    }
   }
 
   reloadData() {

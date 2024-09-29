@@ -80,6 +80,7 @@ export class TableDataComponent implements OnInit, AfterContentInit {
   // Outputs
   @Output() createData = new EventEmitter();
   @Output() batchDeleteData = new EventEmitter<any[]>();
+  @Output() editData = new EventEmitter<any>();
   @Output() deleteData = new EventEmitter<any>();
   @Output() reloadData = new EventEmitter();
   @Output() changePage = new EventEmitter<{
@@ -165,7 +166,9 @@ export class TableDataComponent implements OnInit, AfterContentInit {
   }
 
   // Context menu functions
-  editDataFunc(data: any) {}
+  editDataFunc(data: any) {
+    this.editData.emit(data);
+  }
   deleteDataFunc(data: any) {
     this.confirmationService.confirm({
       header: 'Delete Confirmation',
