@@ -27,7 +27,7 @@
 
   .p-menuitem-link {
     .p-menuitem-icon {
-      margin-right: 0.32rem !important;
+      margin-right: 0.42rem !important;
     }
   }
 
@@ -53,6 +53,14 @@
       padding-top: 1.125rem !important;
 
       .p-confirm-popup-icon {
+        margin-right: 0.55rem !important;
+      }
+    }
+  }
+
+  .p-confirm-dialog {
+    .p-dialog-content {
+      .p-confirm-dialog-icon {
         margin-right: 0.55rem !important;
       }
     }

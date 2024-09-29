@@ -11,7 +11,7 @@ import {
   TemplateRef,
   ViewChild
 } from '@angular/core';
-import { MenuItem, PrimeTemplate, SortEvent } from 'primeng/api';
+import { ConfirmationService, MenuItem, MenuItemCommandEvent, PrimeTemplate, SortEvent } from 'primeng/api';
 import { ContextMenu } from 'primeng/contextmenu';
 import { PaginatorState } from 'primeng/paginator';
 import { Table, TableService } from 'primeng/table';
@@ -79,10 +79,8 @@ export class TableDataComponent implements OnInit, AfterContentInit {
 
   // Outputs
   @Output() createData = new EventEmitter();
-  @Output() batchDeleteData = new EventEmitter<{
-    event: MouseEvent;
-    selectedData: any[];
-  }>();
+  @Output() batchDeleteData = new EventEmitter<any[]>();
+  @Output() deleteData = new EventEmitter<any>();
   @Output() reloadData = new EventEmitter();
   @Output() changePage = new EventEmitter<{
     pageNumber: number;
@@ -101,18 +99,11 @@ export class TableDataComponent implements OnInit, AfterContentInit {
   @ViewChild('ctxMenu', { static: true }) ctxMenu!: ContextMenu;
 
   //! Constructor
-  constructor() {}
+  constructor(private confirmationService: ConfirmationService) {}
 
   ngOnInit(): void {
     this.contextMenuActions.forEach((ctxItem) => {
       switch (ctxItem) {
-        case 'view':
-          this.ctxMenuItems.push({
-            label: 'View',
-            icon: 'pi pi-eye',
-            command: () => this.viewDataFunc(this.ctxMenuSelectedItem)
-          });
-          break;
         case 'edit':
           this.ctxMenuItems.push({
             label: 'Edit',
@@ -148,10 +139,20 @@ export class TableDataComponent implements OnInit, AfterContentInit {
   createDataFunc() {
     this.createData.emit();
   }
-  deleteSelectedDataFunc(e: MouseEvent) {
-    this.batchDeleteData.emit({
-      event: e,
-      selectedData: this.selectedData
+  deleteSelectedDataFunc() {
+    this.confirmationService.confirm({
+      header: 'Delete Confirmation',
+      message: 'Are you sure you want to delete the selected record?',
+      icon: 'pi pi-exclamation-circle',
+      acceptIcon: 'none',
+      rejectIcon: 'none',
+      acceptLabel: 'Yes',
+      rejectLabel: 'No',
+      acceptButtonStyleClass: 'p-button-danger ml-2',
+      rejectButtonStyleClass: 'p-button-secondary',
+      accept: () => {
+        this.batchDeleteData.emit(this.selectedData);
+      }
     });
   }
   reloadDataFunc() {
@@ -164,9 +165,23 @@ export class TableDataComponent implements OnInit, AfterContentInit {
   }
 
   // Context menu functions
-  viewDataFunc(data: any) {}
   editDataFunc(data: any) {}
-  deleteDataFunc(data: any) {}
+  deleteDataFunc(data: any) {
+    this.confirmationService.confirm({
+      header: 'Delete Confirmation',
+      message: 'Do you want to delete this record?',
+      icon: 'pi pi-exclamation-circle',
+      acceptButtonStyleClass: 'p-button-danger ml-2',
+      rejectButtonStyleClass: 'p-button-secondary',
+      acceptIcon: 'none',
+      rejectIcon: 'none',
+      acceptLabel: 'Yes',
+      rejectLabel: 'No',
+      accept: () => {
+        this.deleteData.emit(data);
+      }
+    });
+  }
   showContextMenu(e: MouseEvent, data: any) {
     this.ctxMenuSelectedItem = data;
     this.ctxMenu.show(e);

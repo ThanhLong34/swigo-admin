@@ -25,7 +25,11 @@ export class UsersService {
     return this.http.post<HttpResponse<User>>(`${this.apiUrl}`, user);
   }
 
-  deleteByIds(ids: number[]) {
+  deleteUser(id: number) {
+    return this.http.delete<HttpResponse<User>>(`${this.apiUrl}/${id}`);
+  }
+
+  deleteUserByIds(ids: number[]) {
     return this.http.delete<HttpResponse<User>>(`${this.apiUrl}/deleteByIds`, {
       params: {
         ids: ids.join(',')
