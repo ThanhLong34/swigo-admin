@@ -1,24 +1,36 @@
 <app-card [showHeader]="false">
   <div class="mb-3">
-    <p-button
-      severity="primary"
-      [label]="tableProps.createBtnText"
-      icon="pi pi-plus"
-      size="small"
-      class="mr-2"
-      (onClick)="createDataFunc()"
-    />
+    <p-button severity="primary" [label]="createButtonText" icon="pi pi-plus" size="small" class="mr-2" (onClick)="createDataFunc()" />
     <p-button
       severity="danger"
-      [label]="tableProps.batchDeleteBtnText"
+      [label]="batchDeleteButtonText"
       icon="pi pi-trash"
       size="small"
+      class="mr-2"
       (onClick)="deleteSelectedDataFunc()"
       [disabled]="!selectedData || !selectedData.length"
     />
+    <p-button severity="secondary" [label]="reloadButtonText" icon="pi pi-sync" size="small" (onClick)="reloadDataFunc()" />
   </div>
 
-  <p-table [value]="data" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-gridlines" [(selection)]="selectedData">
+  <p-contextMenu #ctxMenu appendTo="body" [model]="ctxMenuItems" />
+
+  <p-table
+    #primeTable
+    [tableStyle]="{ 'min-width': '50rem' }"
+    styleClass="p-datatable-gridlines"
+    [value]="data"
+    [dataKey]="dataKey"
+    [(selection)]="selectedData"
+    [selectionMode]="selectionMode"
+    [(contextMenuSelection)]="ctxMenuSelectedItem"
+    [contextMenu]="ctxMenu"
+    [resizableColumns]="true"
+    columnResizeMode="expand"
+    sortMode="multiple"
+    [customSort]="true"
+    (sortFunction)="customSort($event)"
+  >
     <ng-template pTemplate="header">
       @if (headerTemplate) {
         <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
@@ -30,4 +42,14 @@
       }
     </ng-template>
   </p-table>
+
+  <p-paginator
+    (onPageChange)="changePageFunc($event)"
+    [first]="paginatorState.first!"
+    [rows]="paginatorState.rows"
+    [totalRecords]="pageInfo.totalItems"
+    [rowsPerPageOptions]="itemPerPageOptions"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="{first} - {last} of {totalRecords}"
+  />
 </app-card>

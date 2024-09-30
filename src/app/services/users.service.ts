@@ -24,4 +24,16 @@ export class UsersService {
   createUser(user: CreateUser) {
     return this.http.post<HttpResponse<User>>(`${this.apiUrl}`, user);
   }
+
+  deleteUser(id: number) {
+    return this.http.delete<HttpResponse<User>>(`${this.apiUrl}/${id}`);
+  }
+
+  deleteUserByIds(ids: number[]) {
+    return this.http.delete<HttpResponse<User>>(`${this.apiUrl}/deleteByIds`, {
+      params: {
+        ids: ids.join(',')
+      }
+    });
+  }
 }

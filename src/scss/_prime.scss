@@ -9,6 +9,10 @@
     }
   }
 
+  .p-button {
+    padding: 0.4375rem 0.875rem !important;
+  }
+
   // .p-toast-summary,
   // .p-toast-detail {
   //   font-size: 0.75rem !important;
@@ -22,6 +26,47 @@
   .p-button {
     .p-button-icon.p-button-icon-left {
       margin-right: 0.32rem !important;
+    }
+  }
+
+  .p-menuitem-link {
+    .p-menuitem-icon {
+      margin-right: 0.42rem !important;
+    }
+  }
+
+  p-password {
+    .p-password {
+      width: 100% !important;
+    }
+
+    input.p-inputtext {
+      width: 100% !important;
+    }
+
+    eyeicon.p-icon-wrapper,
+    eyeslashicon.p-icon-wrapper {
+      transform: translateY(-50%) !important;
+    }
+  }
+
+  .p-confirm-popup {
+    transform: translateY(18px) !important;
+
+    .p-confirm-popup-content {
+      padding-top: 1.125rem !important;
+
+      .p-confirm-popup-icon {
+        margin-right: 0.55rem !important;
+      }
+    }
+  }
+
+  .p-confirm-dialog {
+    .p-dialog-content {
+      .p-confirm-dialog-icon {
+        margin-right: 0.55rem !important;
+      }
     }
   }
 }

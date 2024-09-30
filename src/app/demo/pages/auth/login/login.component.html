@@ -45,7 +45,8 @@
             </div>
             <div class="flex flex-column gap-2 mb-4">
               <label for="password">{{ 'enter_your_password' | i18next }}</label>
-              <input pInputText id="password" aria-describedby="password-help" formControlName="password" (blur)="handleShowToast('password')" />
+              <p-password class="w-100" formControlName="password" [toggleMask]="true" [feedback]="false" (onBlur)="handleShowToast('password')" />
+              <!-- <input pInputText id="password" type="password" aria-describedby="password-help" formControlName="password" (blur)="handleShowToast('password')" /> -->
               <small>{{ 'password_min_length' | i18nextNamespace: 'validation' }}</small>
               @if (passwordIsInvalid) {
                 <small class="text-red-400">{{ 'password_invalid' | i18nextNamespace: 'validation' }}</small>

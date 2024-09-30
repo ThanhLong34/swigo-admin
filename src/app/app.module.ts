@@ -1,13 +1,15 @@
 // angular import
-import { isDevMode, NgModule } from '@angular/core';
+import { isDevMode, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { registerLocaleData } from '@angular/common';
+import localeVi from '@angular/common/locales/vi';
 
 // project import
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './demo/shared/shared.module';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 import { I18NextModule } from 'angular-i18next';
 import { I18N_PROVIDERS } from './providers/i18next.provider';
@@ -25,6 +27,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 // Interceptors
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+
+registerLocaleData(localeVi);
 
 @NgModule({
   declarations: [AppComponent],
@@ -49,12 +53,14 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
   ],
   providers: [
     MessageService,
+    ConfirmationService,
     I18N_PROVIDERS,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true,
+      multi: true
     },
+    { provide: LOCALE_ID, useValue: 'vi' }
   ],
   bootstrap: [AppComponent]
 })

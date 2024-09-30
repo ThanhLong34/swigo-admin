@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { I18NEXT_SERVICE, I18NextModule, ITranslationService } from 'angular-i18next';
 import { MessageService } from 'primeng/api';
 import { SharedModule } from 'src/app/demo/shared/shared.module';
 import { I18NextNamespacePipe } from 'src/app/pipes/i18next-namespace.pipe';
 import { UsersService } from 'src/app/services/users.service';
+import { User } from 'src/app/types/user.type';
 
 @Component({
   selector: 'app-create-or-update-user',
@@ -15,11 +16,12 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class CreateOrUpdateUserComponent {
   formData!: FormGroup;
+  visible = false;
+  dialogType: 'create' | 'update' = 'create';
 
-  @Input({ required: true }) visible = false;
-  @Output() visibleChange = new EventEmitter<Boolean>();
   @Output() afterSubmit = new EventEmitter();
-  @Output() close = new EventEmitter();
+  @Output() afterOpen = new EventEmitter();
+  @Output() afterClose = new EventEmitter();
 
   constructor(
     private messageService: MessageService,
@@ -34,9 +36,33 @@ export class CreateOrUpdateUserComponent {
     });
   }
 
-  closeFunc() {
-    this.visibleChange.emit(false);
-    this.close.emit();
+  private _rebuildFormControlsForCreate() {
+    if (!this.formData.controls['password']) {
+      this.formData.addControl('password', new FormControl('', [Validators.required, Validators.minLength(6)]));
+    }
+  }
+
+  private _rebuildFormControlsForUpdate() {
+    this.formData.removeControl('password');
+  }
+
+  open(data: User | null = null) {
+    this.visible = true;
+    if (data) {
+      this.dialogType = 'update';
+      this._rebuildFormControlsForUpdate();
+      this.formData.patchValue(data);
+    } else {
+      this.dialogType = 'create';
+      this._rebuildFormControlsForCreate();
+      this.formData.reset();
+    }
+    this.afterOpen.emit();
+  }
+
+  close() {
+    this.visible = false;
+    this.afterClose.emit();
   }
 
   submitFunc() {
@@ -47,7 +73,7 @@ export class CreateOrUpdateUserComponent {
           summary: this.i18NextService.t('success'),
           detail: this.i18NextService.t('create_user_success')
         });
-        this.closeFunc();
+        this.close();
         this.afterSubmit.emit(this.formData.value);
       }
     });
@@ -86,7 +112,10 @@ export class CreateOrUpdateUserComponent {
 
   get passwordIsInvalid() {
     const passwordCtrl = this.formData.controls['password'];
-    return passwordCtrl.touched && passwordCtrl.dirty && passwordCtrl.invalid;
+    if (passwordCtrl) {
+      return passwordCtrl.touched && passwordCtrl.dirty && passwordCtrl.invalid;
+    }
+    return false;
   }
 
   get emailIsInvalid() {
