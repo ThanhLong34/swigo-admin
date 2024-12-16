@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpResponse } from '../types/http/response.type';
 import { User, UserLogin } from '../types/user.type';
 import { environment } from '../../environments/environment';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,22 @@ export class AuthService {
   }
 
   login(user: UserLogin) {
-    return this.http.post<HttpResponse<User>>(`${this.apiUrl}/signin`, user);
+    // return this.http.post<HttpResponse<User>>(`${this.apiUrl}/signin`, user);
+    const res: HttpResponse<User> = {
+      code: 0,
+      message: 'Login',
+      data: {
+        id: 1,
+        uuid: 'abc',
+        username: 'admin',
+        email: 'admin@admin.com',
+        nickName: 'Admin',
+        createdAt: '',
+        updatedAt: '',
+        deletedAt: null
+      }
+    };
+    return of(res);
   }
 
   logout() {
